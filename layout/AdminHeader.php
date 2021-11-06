@@ -1,5 +1,6 @@
   
 <html>
+    
    <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>header</title>
@@ -11,8 +12,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+ <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <link rel="stylesheet" href="css/style.css?<?php echo time(); ?>"> 
-      <script src="js/script.js"></script>
+       <script type="text/javascript" src="//js/script.js" async></script>
    </head>
 <body> 
 <!-- Navigation Block -->   
@@ -21,13 +23,13 @@
 		<nav class="navbar row">
 			 <div class="navbar-h">
 				<a class="navbar-brand" id="logo" href="#"><img src="layout/812381_305489.png" alt="logo"" ></a>
-				<button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
+                                <button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1" >
 					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 				</button>
 			</div>
 			<div class="collapse navbar-collapse navbar-1">
-				<ul class="site-navigation nav">
-					<li>
+                            <ul class="site-navigation nav" id="myLinks">
+                                    <li id="top">
 						<a href="#">لوحة التحكم</a>
 					</li>
 					<li>
@@ -39,6 +41,9 @@
                                         <li>
 						<a href="#">الرئيسة</a>
 					</li>
+                                          <li id="SO">
+						<a href="#">تسجيل خروج</a>
+					</li>
 				
                                         
 					
@@ -49,7 +54,7 @@
                    <button id='logout' type="submit" onClick="return false;">تسجيل خروج
                        <span class="glyphicon glyphicon-log-out" style="margin-left: 3px;"></span>
                    </button>
-                    <p>المستخدم</p>
+                    <!-- comment  <p>المستخدم</p>-->
                 
                    
 		</nav>

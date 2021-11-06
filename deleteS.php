@@ -6,9 +6,8 @@
  */
 require 'config.php';
 $memberId= $_POST['productId'];
- $sql="DELETE FROM member WHERE email_address='$memberId'";
+ $sql="DELETE FROM sponsor WHERE email_address='$memberId'";
   $result = mysqli_query( $connection, $sql);
   echo 'Sucssess';
-
 
 
