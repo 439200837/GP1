@@ -1,4 +1,6 @@
-<?php require 'layout/AdminHeader.php'; 
+<?php 
+//connect to the AdminHeader.php page and to config.php page
+require 'layout/AdminHeader.php'; 
 require 'config.php';
 // change title name
 echo "<script> document.title='إضافة عضو' </script>";
@@ -12,7 +14,7 @@ echo "<script> document.title='إضافة عضو' </script>";
 	use PHPMailer\PHPMailer\Exception;
 
 if(isset($_POST['add'])){
- 
+  //define the variables
     $pass1=$_POST["pass"];
   $first_name = $_POST['fname'];
   $last_name = $_POST['lname'];
@@ -21,7 +23,7 @@ if(isset($_POST['add'])){
     $phone_number = $_POST['phone'];
     $address = $_POST['address'];
   $password = password_hash($_POST['pass'], PASSWORD_BCRYPT);
- 
+ //bring the phone number and email information to check if it has been stored before
   $sql_p = "SELECT * FROM member WHERE phone_number='$phone_number'";
   $sql_e = "SELECT * FROM member WHERE email_address='$email_address'";
 
@@ -33,7 +35,7 @@ if(isset($_POST['add'])){
         else if(mysqli_num_rows($res_e) > 0){
         echo "<p style=' text-align: right; color:red; margin-top:120px;'>". "نعتذر ، البريد الإلكتروني مستخدم من قبل عضو اخر يرجى تغيير البريد الإلكتروني"."</p>";
     }else{
-       
+       //insert in member table
        $query = "INSERT INTO member (email_address,password,first_name,last_name,gender,phone_number,address) VALUES ('$email_address','$password','$first_name','$last_name','$gender','$phone_number','$address')";
         $results = mysqli_query($connection, $query);
        
@@ -41,6 +43,7 @@ if(isset($_POST['add'])){
                     echo "<p style='text-align: right; margin-top:120px;'>". "نعتذر ، حدث خطأ"."</p>";
                                     }
                  else {
+                       //echo success adding member
                           echo "<script>
            
                 Swal.fire({
@@ -56,6 +59,7 @@ if(isset($_POST['add'])){
                          })
 
                  </script>";
+//send an auto email including the email and password if the member is added
 //Create instance of PHPMailer
 	$mail = new PHPMailer();
 //Set mailer to use smtp
@@ -101,7 +105,7 @@ if(isset($_POST['add'])){
 <element dir="rtl">
 
   
-  
+    <!-- Form that will appear to user -->
     <body class="reg" onchange="my();" >
         <div class="container5">
     <div class="title" dir="rtl">إضافة الأعضاء</div>
@@ -188,6 +192,7 @@ if(isset($_POST['add'])){
 <script type="text/javascript">
       var count=0;
    document.getElementById("Submit").disabled=true;
+   //Validate password
        function ValidatePassword() {
             var lowerCaseLetters = /[a-z]/g;
             var upperCaseLetters = /[A-Z]/g;
@@ -257,6 +262,7 @@ if(isset($_POST['add'])){
 
             }
         }
+        //Validate email
         function ValidateEmail() {
             var email = document.getElementById("email").value;
              const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -270,18 +276,9 @@ if(isset($_POST['add'])){
                 count--;
              }
 
-           /* var confirmEmail = document.getElementById("ConfirmEmail").value;
-            if (email !== confirmEmail) {
-               document.getElementById("er2").innerHTML="البريد الإلكتروني غير متطابق";
-              document.getElementById("ConfirmEmail").style.borderColor="red";
-            count++;
-            }else{
-             document.getElementById("er2").innerHTML="";
-              document.getElementById("ConfirmEmail").style.borderColor="#9b59b6";
-                count--;
-            return true;
-            }*/
+         
         }
+        //Validate phone number if it begin with 0 and its length 10
            function ValidatePhone() {
       var regex="^0[0-9]{9}$";
       var phone = document.getElementById("phone").value;
@@ -296,13 +293,15 @@ if(isset($_POST['add'])){
              }
 
     }
+    //Validate first name,last name if it is in arabic and its only charichaters
+    /// //Validate address thats written in arabic number are allowed
           function ValidateName() {
       var regex="^[\u0621-\u064A\040]+$";
       var reg="[\u0600-\u06FF]";
       var fname = document.getElementById("fname").value;
        var lname = document.getElementById("lname").value;
        var address = document.getElementById("address").value;
-       //var sp = document.getElementById("sp").value;
+      
          if (!fname.match(regex)){
                  document.getElementById("er6").innerHTML="فضلا ، ادخل اسم صحيح";
                   document.getElementById("fname").style.borderColor="red";
@@ -331,16 +330,9 @@ if(isset($_POST['add'])){
                 document.getElementById("address").style.borderColor="#9b59b6";
               count--;
              }
-               /* if (!sp.match(reg) &&sp!==""){
-                 document.getElementById("er9").innerHTML="فضلا ، ادخل عنوان صحيح";
-                 document.getElementById("sp").style.borderColor="red";
-                 count++;
-             }else{
-                document.getElementById("er9").innerHTML="";
-                document.getElementById("sp").style.borderColor="#9b59b6";
-                 count--;
-             }*/
+      
     }
+    // if any input is had an error user can not click on add button until every inpunt is written correct
     function my(){
         er=document.getElementById("fname").style.borderColor;
         er1=document.getElementById("lname").style.borderColor;
@@ -362,8 +354,9 @@ if(isset($_POST['add'])){
 </body>
 
     <element dir="ltr">
+        <!-- footer calling -->   
       <?php require 'layout/footer.php'; 
-      
+     // close database connections 
      mysqli_close($connection);
 ?>
    </body>

@@ -1,6 +1,9 @@
 <?php require 'layout/AdminHeader.php'; 
 require 'config.php';
-$id=@$_GET['id'];?>
+$id=@$_GET['id'];
+ // change title name
+echo "<script> document.title='تعديل بيانات المتطوع' </script>";
+?>
 <element dir="rtl">
     <body class="reg" onchange="my()">
         <div class="container5">

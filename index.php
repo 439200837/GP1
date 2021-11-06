@@ -217,16 +217,7 @@ if(isset($_POST['add'])){
 <br>
         </div>
 
-        <!-- <div class="input-box">
-            <span class="details" dir="rtl">ماذا تفضل؟</span>
-          <select name="preference" id="pref"  dir="rtl" >
-              <option value="undirect">العمل بدون تواصل مع المستفيدين</option>
-              <option value="old">أفضل التعامل مع كبار السن</option>
-              <option value="children">أفضل التعامل مع الأطفال</option>
-              <option value="handdicaped">أفضل التعامل مع ذوي الاحتياجات الخاصة</option>
-            </select>
-        </div> -->
-
+  
             <div  dir="rtl" id="Skilll">
 
         <span  dir="rtl" >المهارات</span><br><br>

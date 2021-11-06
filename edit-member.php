@@ -1,6 +1,8 @@
 <?php require 'layout/AdminHeader.php';
 require 'config.php';
 $id=@$_GET['id'];
+ // change title name
+echo "<script> document.title='تعديل بيانات العضو' </script>";
 ?>
 <element dir="rtl">
 <html>

@@ -1,6 +1,8 @@
 
 <?php
+//calling database conennction
 require 'config.php';
+//header 
 require 'layout/AdminHeader.php';
 // change title name
 echo "<script> document.title='لوحة التحكم' </script>";
@@ -16,13 +18,14 @@ echo "<script> document.title='لوحة التحكم' </script>";
             <button class="dropbtn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
   <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
 </svg> الأعضاء </button>
+            <!-- menue -->
   <div class="dropdown-content">
       <button id="displayM" class="display" type="button">الأعضاء</button>
       <button id="displayV" class="display" type="button">المتطوعين</button>
       <button id="displayS" class="display" type="button">الرعاة</button>
   </div>
 </div>
-            
+            <!-- add button -->
             <a href="add.php" id="addB" <button class="button" type="button">إضافة عضو</button></a>
             
         </div>
@@ -33,7 +36,7 @@ echo "<script> document.title='لوحة التحكم' </script>";
             <tr class="row1">
                   <td class="column1">#</td>
                   <?php
-   
+   //member infomation will appear first
             echo
       '<td class="column1">اسم العضو </td>'
            .'<td class="column2">البريد الإلكتروني</td>'.'<td class="column3">رقم الهاتف</td>'.
@@ -42,7 +45,7 @@ echo "<script> document.title='لوحة التحكم' </script>";
                '<td class="column4">الحذف</td>'.' </tr>  
             </thead>';
             
-            
+            //including all members in database
                     $sql="SELECT * FROM member";
           $result = mysqli_query( $connection, $sql);
 if (mysqli_num_rows($result) > 0) {
@@ -90,10 +93,11 @@ if (mysqli_num_rows($result) > 0) {
  <script type="text/javascript">
 
  $(document).ready(function() {
-
+//jQuery for dropdown menu 
+//for sponsor choice, call sponsorInfo using POST 
     $("#displayS").click(function() {                
 
-      $.ajax({    //create an ajax request to display.php
+      $.ajax({    //create an ajax request to sponsorInfo.php
         type: "GET",
         url: "sponsorInfo.php",             
         dataType: "html",   //expect html to be returned                
@@ -105,10 +109,10 @@ if (mysqli_num_rows($result) > 0) {
     });
 });
 
-
+//for member choice, call memberInfo using POST 
   $("#displayM").click(function() {                
 
-      $.ajax({    //create an ajax request to display.php
+      $.ajax({    //create an ajax request to memberInfo.php
         type: "GET",
         url: "memberInfo.php",             
         dataType: "html",   //expect html to be returned                
@@ -119,10 +123,10 @@ if (mysqli_num_rows($result) > 0) {
 
     });
 });
-
+//for volunteer choice, call volunteerInfo using POST 
  $("#displayV").click(function() {                
 
-      $.ajax({    //create an ajax request to display.php
+      $.ajax({    //create an ajax request to volunteerInfo.php
         type: "GET",
         url: "volunteerInfo.php",             
         dataType: "html",   //expect html to be returned                
@@ -136,10 +140,10 @@ if (mysqli_num_rows($result) > 0) {
  
 });
 
-
+//delete users using jQuery (POST)
 $(document).ready(function(){
 		
-		
+		//when click on delete button
 		$(document).on('click', '#delete_user', function(e){
 		
 			var productId = $(this).data('id');
@@ -149,7 +153,7 @@ $(document).ready(function(){
 		});
 		
 	
-	
+	//an alert will appear to confirm deleting
 	function SwalDelete(productId){
 	Swal.fire({
   title: 'هل أنت متأكد ؟',
@@ -162,6 +166,7 @@ $(document).ready(function(){
   cancelButtonText:'إلغاء'
 }).then((result) => {
   if (result.isConfirmed) {
+      //when click on confirm
      $.ajax({    //create an ajax request 
         type: "POST",
         url: "delete.php",
@@ -170,14 +175,14 @@ $(document).ready(function(){
         success: function(response){                    
             Swal.fire(
       response,
-      'Your file has been deleted.',
+      'Your file has been deleted.',//alert message with success delete 
       'success'    
     ).then((result) => {
-        location.reload(true); 
+        location.reload(true); // reload page 
     })
         },
   error: function(XMLHttpRequest, textStatus, errorThrown) {
-     alert(textStatus);
+     alert(textStatus); //alert error message if there
   }
 
     });//end ajax
