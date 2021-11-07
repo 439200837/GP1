@@ -1,12 +1,12 @@
-<?php require 'layout/header.php';
+<?php 
+//connect to the header.php page and to config.php page
+require 'layout/header.php';
 require 'config.php';  
 // change title name
 echo "<script> document.title='إنشاء حساب' </script>";
 if(isset($_POST['add'])){
-
+//define the variables
     $pass1=$_POST["password"];
-
-
   	$first_name = $_POST['first_name'];
   	$last_name = $_POST['last_name'];
   	$email_address = $_POST['email_address'];
@@ -15,9 +15,9 @@ if(isset($_POST['add'])){
     $phone_number = $_POST['phone_number'];
     $address = $_POST['address'];
     $educational_level = $_POST['educational_level'];
-   // $cumlativeRating = $_POST['cumlativeRating'];
+// use hash function for Password encryption
   	$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
+//bring the phone number and email information to check if it has been stored before
   	$sql_p = "SELECT * FROM volunteer WHERE phone_number='$phone_number'";
   	$sql_e = "SELECT * FROM volunteer WHERE email_address='$email_address'";
 
@@ -29,12 +29,13 @@ if(isset($_POST['add'])){
         else if(mysqli_num_rows($res_e) > 0){
         echo "<p style='text-align: right; color:red; margin-top:120px;'>". "نعتذر ، البريد الإلكتروني مستخدم من قبل عضو اخر يرجى تغيير البريد الإلكتروني"."</p>";
     }else{
-       // echo 'تم تسجيل بياناتك بنجاح';
+      //insert into the volunteer table in database
        $query = "INSERT INTO `volunteer` (email_address,first_name,last_name,gender,dateOfBirth,phone_number,address,cumlativeRating,educational_level,password)
 	 VALUES ('$email_address','$first_name','$last_name','$gender','$dateOfBirth','$phone_number','$address','0.00','$educational_level','$password')";
         $results = mysqli_query($connection, $query);
 
            if($results){
+               //save input in preference, skill and qualification tables
                if (isset($_POST['preference1'])){ $preference1 = $_POST['preference1'];
     $query2="INSERT INTO `preference`(`Preferences`, `Vemail_address`) VALUES ('$preference1','$email_address')";
      $results2 = mysqli_query($connection, $query2);
@@ -72,8 +73,8 @@ if(isset($_POST['add'])){
     $query10="INSERT INTO `qualification`(`qualifications`, `Vemail_address`) VALUES ('$specialization','$email_address')";
      $results10 = mysqli_query($connection, $query10);
    }
+   //Print the result of creating an account
              echo "<script>
-           
                 Swal.fire({
                      icon: 'success',
                      title: 'تم إنشاء حسابك بنجاح',
@@ -241,6 +242,7 @@ if(isset($_POST['add'])){
       var count=0;
    document.getElementById("SubmitButtun").disabled=true;
         function ValidatePassword() {
+            //validate password
             var lowerCaseLetters = /[a-z]/g;
             var upperCaseLetters = /[A-Z]/g;
             var numbers = /[0-9]/g;
@@ -309,6 +311,7 @@ if(isset($_POST['add'])){
 
             }
         }
+        //validate email
         function ValidateEmail() {
             var email = document.getElementById("email").value;
              const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -334,6 +337,7 @@ if(isset($_POST['add'])){
             return true;
             }
         }
+        //validate phone start with 0 and contain 10 digit
            function ValidatePhone() {
       var regex="^0[0-9]{9}$";
       var phone = document.getElementById("phone").value;
@@ -348,6 +352,7 @@ if(isset($_POST['add'])){
              }
 
     }
+    //validate names, qulification written in arabic and address in arabic and may have digit
           function ValidateName() {
       var regex="^[\u0621-\u064A\040]+$";
       var reg="[\u0600-\u06FF]";
@@ -393,6 +398,7 @@ if(isset($_POST['add'])){
                  count--;
              }
     }
+    //check if there are any input has an error then user can not click on submit button
     function my(){
         er=document.getElementById("fname").style.borderColor;
         er1=document.getElementById("lname").style.borderColor;
@@ -415,7 +421,7 @@ if(isset($_POST['add'])){
 
     <element dir="ltr">
       <?php require 'layout/footer.php';
-
+//close database connection
        mysqli_close($connection);
 ?>
     </body>

@@ -49,8 +49,8 @@ if (mysqli_num_rows($result) > 0) {
 		<td class="cell100 column2">'.$row['email_address'].'</td>
 		<td class="cell100 column3">'.$row['phone_number'].'</td>
 		<td class="cell100 column4">'.$row['gender'].'</td>
-                <td class="column5"><a href="edit-member.php?id='.$row['id'].'">تعديل</a></td><!-- comment -->
-                <td class="column6"><a href="#myModal" class="trigger-btn" data-toggle="modal">حذف</a></td>
+            <td class="column5"><a href="edit-member.php?id='.$row['id'].'&email='.$row['email_address'].'">تعديل</a></td><!-- comment -->
+                <td class="column6"> <input<a href="javascript:void(0)" id="delete_user" data-id='.$row['email_address'].' class="trigger-btn" data-toggle="modal">حذف </a></td>
 		
         </tr>';
   }
@@ -71,28 +71,7 @@ if (mysqli_num_rows($result) > 0) {
            echo '</tbody> 
             
         </table>
-        
-    <!-- Modal HTML -->
-<div id="myModal" class="modal fade">
-	<div class="modal-dialog modal-confirm">
-		<div class="modal-content">
-			<div class="modal-header flex-column">
-				<div class="icon-box">
-				<i class="material-icons"><i class="fa fa-times" aria-hidden="true"></i></i>
-				</div>						
-				<h4 class="modal-title w-100">هل أنت متأكد ؟</h4>	
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			<div class="modal-body">
-				<p>حذفك لهذا الحساب يعني حذف جميع بياناته الشخصية</p>
-			</div>
-			<div class="modal-footer justify-content-center">
-                            <a href="delete.php?id=2"><button type="button" class="btn btn-danger">حذف</button></a>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
-			</div>
-		</div>
-	</div>
-</div>
+   
                   
  <script type="text/javascript">
 
@@ -141,5 +120,57 @@ if (mysqli_num_rows($result) > 0) {
     });
 });
 });
-</script>';
+
+
+
+$(document).ready(function(){';
+		
+echo "$(document).on('click', '#delete_user', function(e){
+		
+	var productId = $(this).data('id');
+	SwalDelete(productId);
+	e.preventDefault();
+                     
+		});
+		
+	
+	
+	function SwalDelete(email){
+	Swal.fire({
+  title: 'هل أنت متأكد ؟',
+  text: 'لن تستطيع استرجاع البيانات بعد عملية الحذف',
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#d33',
+  cancelButtonColor: '#3085d6',
+  confirmButtonText: 'حذف',
+  cancelButtonText:'إلغاء'
+}).then((result) => {
+  if (result.isConfirmed) {
+     $.ajax({    //create an ajax request 
+        type: 'POST',
+        url: 'delete.php',
+        data: {email:email},
+        dataType: 'html',   //expect html to be returned                
+        success: function(response){                    
+            Swal.fire(
+      response,
+      'تم حذف بيانات العضو بنجاح',
+      'success'    
+    ).then((result) => {
+        location.reload(true); 
+    })
+        },
+  error: function(XMLHttpRequest, textStatus, errorThrown) {
+     alert(textStatus);
+  }
+
+    });//end ajax
+
+            }
+})
+		
+	}
+});
+</script>";
 

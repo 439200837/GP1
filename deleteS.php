@@ -1,13 +1,11 @@
 <?php
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//include connection file
 require 'config.php';
-$memberId= $_POST['productId'];
- $sql="DELETE FROM sponsor WHERE email_address='$memberId'";
+//save email comes from Ajax
+$email= $_POST['email'];
+ $sql="DELETE FROM sponsor WHERE email_address='$email'";
+ //echo result
   $result = mysqli_query( $connection, $sql);
-  echo 'Sucssess';
+ echo 'تمت العملية';
 
 

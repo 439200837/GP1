@@ -29,11 +29,11 @@ echo "<script> document.title='تعديل بيانات الراعي' </script>";
 
           <div class="input-box">
             <span class="details" dir="rtl">البريد الإلكتروني</span>
-            <input type="email" placeholder="ادخل البريد الإلكتروني" dir="rtl"  id="email" onchange="ValidateEmail()"  name="email_address" value="<?=$row['email_address']?>">
+            <input type="email" placeholder="mail@example.com" dir="rtl"  id="email" onchange="ValidateEmail()"  name="email_address" value="<?=$row['email_address']?>">
           </div>
           <div class="input-box">
             <span class="details" dir="rtl">رقم الهاتف</span>
-            <input type="tel" placeholder="ادخل رقم الهاتف" id="phone" dir="rtl" onchange="ValidatePhone()"  name="phone_number" value="<?= $row['phone_number']?>">
+            <input type="tel" placeholder="05XXXXXXXX" id="phone" dir="rtl" onchange="ValidatePhone()"  name="phone_number" value="<?= $row['phone_number']?>">
             <p id="er5" style="color: red;"></p>
 
           </div>
@@ -42,7 +42,7 @@ echo "<script> document.title='تعديل بيانات الراعي' </script>";
             
             <div class="input-box">
             <span class="details" dir="rtl">العنوان</span>
-            <input type="text" placeholder="ادخل العنوان" id="address" onchange="ValidateNameٍsponser()"    dir="rtl" name="address" value="<?= $row['address']?>">
+            <input type="text" placeholder="المدينة، الحي ، الشارع" id="address" onchange="ValidateNameٍsponser()"    dir="rtl" name="address" value="<?= $row['address']?>">
       
             <p id="er8" style="color: red;"></p>
   </div>

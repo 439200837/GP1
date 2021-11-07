@@ -69,28 +69,7 @@ if (mysqli_num_rows($result) > 0) {
            echo '</tbody> 
             
         </table>
-        
-    <!-- Modal HTML -->
-<div id="myModal" class="modal fade">
-	<div class="modal-dialog modal-confirm">
-		<div class="modal-content">
-			<div class="modal-header flex-column">
-				<div class="icon-box">
-				<i class="material-icons"><i class="fa fa-times" aria-hidden="true"></i></i>
-				</div>						
-				<h4 class="modal-title w-100">هل أنت متأكد ؟</h4>	
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			</div>
-			<div class="modal-body">
-				<p>حذفك لهذا الحساب يعني حذف جميع بياناته الشخصية</p>
-			</div>
-			<div class="modal-footer justify-content-center">
-                            <a href="delete.php?id=2"><button type="button" class="btn btn-danger">حذف</button></a>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">إلغاء</button>
-			</div>
-		</div>
-	</div>
-</div>
+    
                   
  <script type="text/javascript">
 
@@ -152,7 +131,7 @@ echo "$(document).on('click', '#delete_user', function(e){
 		
 	
 	
-	function SwalDelete(productId){
+	function SwalDelete(email){
 	Swal.fire({
   title: 'هل أنت متأكد ؟',
   text: 'لن تستطيع استرجاع البيانات بعد عملية الحذف',
@@ -167,12 +146,12 @@ echo "$(document).on('click', '#delete_user', function(e){
      $.ajax({    //create an ajax request 
         type: 'POST',
         url: 'deleteV.php',
-        data: {productId:productId},
+        data: {email:email},
         dataType: 'html',   //expect html to be returned                
         success: function(response){                    
             Swal.fire(
       response,
-      'Your file has been deleted.',
+      'تم حذف بيانات المتطوع بنجاح',
       'success'    
     ).then((result) => {
         location.reload(true); 

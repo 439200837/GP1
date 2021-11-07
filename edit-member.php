@@ -34,13 +34,13 @@ echo "<script> document.title='تعديل بيانات العضو' </script>";
       <form action="edit-member.php" method="POST">
         <div class="user-details">
               <div class="input-box">
-            <span class="details" dir="rtl">الأسم الاول</span>
+            <span class="details" dir="rtl">الاسم الأول</span>
             <input type="text" placeholder="ادخل الاسم الاول" dir="rtl"  id="fname"  onchange="ValidateNameMember()"  name="first_name" value="<?= $row['first_name']?>">
             <p id="er6" style="color: red;"></p>
 
           </div>
           <div class="input-box">
-            <span class="details" dir="rtl">الأسم الثاني</span>
+            <span class="details" dir="rtl">الاسم الثاني</span>
             <input type="text" placeholder="ادخل الاسم الثاني" id="lname" onchange="ValidateNameMember()"  name="last_name" value="<?= $row['last_name']?>" dir="rtl">
             <p id="er7" style="color: red;"></p>
 
@@ -49,13 +49,13 @@ echo "<script> document.title='تعديل بيانات العضو' </script>";
    
           <div class="input-box">
             <span class="details" dir="rtl">البريد الإلكتروني</span>
-            <input type="email" placeholder="ادخل البريد الإلكتروني" dir="rtl" id="email" onchange="ValidateEmail()"  name="email_address" value="<?=$row['email_address']?>">
+            <input type="email" placeholder="mail@example.com" dir="rtl" id="email" onchange="ValidateEmail()"  name="email_address" value="<?=$row['email_address']?>">
             <p id="er" style="color: red;"></p>
 
           </div>
           <div class="input-box">
             <span class="details" dir="rtl">رقم الهاتف</span>
-            <input type="tel" placeholder="ادخل رقم الهاتف" id="phone"  onchange="ValidatePhone()"  dir="rtl" name="phone_number" value="<?= $row['phone_number']?>">
+            <input type="tel" placeholder="05XXXXXXXX" id="phone"  onchange="ValidatePhone()"  dir="rtl" name="phone_number" value="<?= $row['phone_number']?>">
             <p id="er5" style="color: red;"></p>
 
           </div>
@@ -63,7 +63,7 @@ echo "<script> document.title='تعديل بيانات العضو' </script>";
             
             <div class="input-box">
             <span class="details" dir="rtl">العنوان</span>
-            <input type="text" placeholder="ادخل العنوان" id="address" dir="rtl" onchange="ValidateNameMember()"  name="address" value="<?= $row['address']?>">
+            <input type="text" placeholder="المدينة ، الحي ، الشارع" id="address" dir="rtl" onchange="ValidateNameMember()"  name="address" value="<?= $row['address']?>">
             <p id="er8" style="color: red;"></p>
 
           </div>

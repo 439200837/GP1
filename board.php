@@ -154,7 +154,7 @@ $(document).ready(function(){
 		
 	
 	//an alert will appear to confirm deleting
-	function SwalDelete(productId){
+	function SwalDelete(email){
 	Swal.fire({
   title: 'هل أنت متأكد ؟',
   text: "لن تستطيع استرجاع البيانات بعد عملية الحذف",
@@ -170,12 +170,12 @@ $(document).ready(function(){
      $.ajax({    //create an ajax request 
         type: "POST",
         url: "delete.php",
-        data: {productId:productId},
+        data: {email:email},
         dataType: "html",   //expect html to be returned                
         success: function(response){                    
             Swal.fire(
       response,
-      'Your file has been deleted.',//alert message with success delete 
+      'تم حذف بيانات العضو بنجاح',//alert message with success delete 
       'success'    
     ).then((result) => {
         location.reload(true); // reload page 
