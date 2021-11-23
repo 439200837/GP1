@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<link rel="stylesheet" href="css/style.css?<?php echo time(); ?>"> 
+  <link rel="stylesheet" href="css/style.css?<?php echo time(); ?>"> 
       <script src="js/script.js"></script>
     </head>
  
@@ -49,8 +49,8 @@
           </ul>
                             
 			</div>
-                    <button id='log' type="submit" onClick="return false;">تسجيل دخول</button>
-                    <button id='signUp' type="submit" onClick="return false;">إنشاء حساب</button>
+                    <button id='log' type="submit"><a href="log-in.php">تسجيل دخول</a></button>
+                    <button id='signUp' type="submit"><a href="index.php">إنشاء حساب</a></button>
 		</nav>
            
             

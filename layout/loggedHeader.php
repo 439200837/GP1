@@ -45,7 +45,7 @@
                             
 			</div>
                      
-                   <button id='logout' type="submit" onClick="return false;">تسجيل خروج
+                    <button id='logout' type="submit"><a href="logOut.php">تسجيل خروج</a>
                         <span class="glyphicon glyphicon-log-out" style="margin-left: 3px;"></span>
                    </button>
                     <p>المستخدم</p>

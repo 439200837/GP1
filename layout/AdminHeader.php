@@ -30,7 +30,7 @@
 			<div class="collapse navbar-collapse navbar-1">
                             <ul class="site-navigation nav" id="myLinks">
                                     <li id="top">
-						<a href="#">لوحة التحكم</a>
+						<a href="board.php">لوحة التحكم</a>
 					</li>
 					<li>
 						<a href="#">برامجنا</a>
@@ -51,7 +51,7 @@
                             
 			</div>
                      
-                   <button id='logout' type="submit" onClick="return false;">تسجيل خروج
+                    <button id='logout' type="submit"><a href="logOut.php">تسجيل خروج</a>
                        <span class="glyphicon glyphicon-log-out" style="margin-left: 3px;"></span>
                    </button>
                     <!-- comment  <p>المستخدم</p>-->

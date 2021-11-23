@@ -1,5 +1,9 @@
-
 <?php
+ session_start();
+ if($_SESSION['logged_in']!==true && $_SESSION['type']!=='member' ){
+     echo 'sorry ! you are not athorize to accecc this page'; 
+     header('location:log-in.php');
+ }
 //calling database conennction
 require 'config.php';
 //header 
