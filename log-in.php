@@ -136,7 +136,7 @@ if (mysqli_num_rows($results) > 0) {
                         </label> <input class="mb-4 input" type="email" name="email" id="email" placeholder="example@email.com" > </div>
                     <div class="row px-3"> <label class="mb-1">
                             <h6 class="mb-0 text-sm">كلمة المرور</h6>
-                        </label> <input class="input" type="password" name="password" id="pass" placeholder="مثال ......."> </div>
+                        </label> <input class="input" type="password" name="password" id="pass" placeholder="ادخل كلمة المرور"> </div>
                     <div class="row px-3 mb-4 forget">
                     <a href="forgetpass1.php" class="ml-auto mb-0 text-sm">نسيت كلمة المرور ؟</a>
                     </div>

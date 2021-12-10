@@ -112,7 +112,7 @@ if(isset($_POST['add'])){
 
 
    </header>
-   <body class="reg" onchange="my()">
+   <body class="reg" onkeyup="my()">
         <div class="container5">
     <div class="title">تسجيل المتطوعين</div>
     <div class="content">
@@ -121,12 +121,12 @@ if(isset($_POST['add'])){
 
             <div class="input-box">
             <span class="details" dir="rtl">الاسم الأول</span>
-            <input type="text" onchange="ValidateName()" id="fname" placeholder="ادخل الاسم الاول" name="first_name" dir="rtl" required="required">
+            <input type="text" onkeyup="ValidateName()" id="fname" placeholder="ادخل الاسم الاول" name="first_name" dir="rtl" required="required">
             <p id="er6" style="color: red;"></p>
             </div>
              <div class="input-box">
             <span class="details" dir="rtl">الاسم الثاني</span>
-            <input type="text" onchange="ValidateName()" id="lname" name="last_name" placeholder="ادخل الاسم الثاني" dir="rtl" required="required">
+            <input type="text" onkeyup="ValidateName()" id="lname" name="last_name" placeholder="ادخل الاسم الثاني" dir="rtl" required="required">
            <p id="er7" style="color: red;"></p>
              </div>
 
@@ -138,12 +138,12 @@ if(isset($_POST['add'])){
           </div>
               <div class="input-box">
             <span class="details" dir="rtl">تأكيد البريد الإلكتروني</span>
-            <input type="email" onchange="ValidateEmail()" id="ConfirmEmail" placeholder="mail@example.com"  dir="rtl" required="required">
+            <input type="email" onkeyup="ValidateEmail()" id="ConfirmEmail" placeholder="mail@example.com"  dir="rtl" required="required">
             <p id="er2" style="color: red;"></p>
               </div>
                  <div class="input-box">
             <span class="details" dir="rtl">كلمة المرور</span>
-            <input type="password" onkeyup="ValidatePassword()" onfocus="ValidatePassword()" id="txtPassword" name="password" placeholder="8 خانات على الأقل + حروف تحتوي على حرف كبير + أرقام + علامات خاصة"  dir="rtl" required="required">
+            <input type="password" onkeyup="ValidatePassword()" onfocus="ValidatePassword()" id="txtPassword" name="password" placeholder="ادخل كلمة المرور"  dir="rtl" required="required">
             <p id="8char" style="color: red;"></p>
             <p id="upper" style="color: red;"></p>
             <p id="lower" style="color: red;"></p>
@@ -152,7 +152,7 @@ if(isset($_POST['add'])){
                  </div>
           <div class="input-box">
             <span class="details" dir="rtl">تأكيد كلمة المرور</span>
-            <input onchange="ValidatePassword()" type="password" id="txtConfirmPassword" placeholder="ادخل تأكيد كلمة المرور"  dir="rtl" required="required">
+            <input onkeyup="ValidatePassword()" type="password" id="txtConfirmPassword" placeholder="ادخل تأكيد كلمة المرور"  dir="rtl" required="required">
            <p id="er4" style="color: red;"></p>
           </div>
                 <div class="input-box">
@@ -185,12 +185,12 @@ if(isset($_POST['add'])){
         </div>
              <div class="input-box">
             <span class="details" dir="rtl">رقم الهاتف</span>
-            <input onchange="ValidatePhone()" type="number" name="phone_number"  id="phone" placeholder="05XXXXXXXX" " dir="rtl" required="required">
+            <input onkeyup="ValidatePhone()" type="number" name="phone_number"  id="phone" placeholder="05XXXXXXXX" " dir="rtl" required="required">
              <p id="er5" style="color: red;"></p>
              </div>
              <div class="input-box">
             <span class="details" dir="rtl">العنوان</span>
-            <input type="text" onchange="ValidateName()"id="address" name="address" placeholder="المدينة ، الحي ، الشارع"  dir="rtl" required="required">
+            <input type="text" onkeyup="ValidateName()"id="address" name="address" placeholder="المدينة ، الحي ، الشارع"  dir="rtl" required="required">
             <p id="er8" style="color: red;"></p>
              </div>
          <div class="input-box">
@@ -208,7 +208,7 @@ if(isset($_POST['add'])){
           </div>
               <div class="input-box">
             <span class="details" dir="rtl">اسم التخصص</span>
-            <input type="text" onchange="ValidateName()" id="sp" name="specialization" placeholder="ادخل اسم التخصص"  dir="rtl" required="required">
+            <input type="text" onkeyup="ValidateName()" id="sp" name="specialization" placeholder="ادخل اسم التخصص"  dir="rtl" required="required">
             <p id="er9" style="color: red;"></p>
               </div>
           <div  dir="rtl" id="Skilll">
