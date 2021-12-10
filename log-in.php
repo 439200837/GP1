@@ -7,8 +7,6 @@ if(isset($_POST['log'])){
 //define the variables
   	$email_address = $_POST['email'];
         $user_type = $_POST['user'];
-// use hash function for Password encryption
-  	$password = $_POST['password'];
      if($user_type==='member'){
 //bring the phone number and email information to check if it has been stored before
   	$sql_e = "SELECT * FROM `member` WHERE `email_address`='$email_address'";
@@ -29,16 +27,20 @@ if (mysqli_num_rows($results) > 0) {
  $id=$row['id'];
  $email=$row['email_address'];
  $SavedPass=$row['password'];
+  $salt = $row['salt'];
   }
   //check if password entered is equal hashed password in the database
-  if(password_verify($password, $SavedPass)){
+  // use hash function for Password encryption
+  $hashed_password = crypt($_POST['password'],$salt);
+  $bool=hash_equals($hashed_password,$SavedPass );
+  if($bool==1){
        //Create sesstion and redirect member to borad.php
        session_start();
        $_SESSION['type']="member";
        $_SESSION['id']=$id; 
        $_SESSION['email']=$email;
        $_SESSION['logged_in'] = true;
-       header("location:board.php");
+       header("location:home.php");
        
   }else{
        $message= "<p style='text-align: right; color:red; margin-top:20px;'>". "البريد الإلكتروني أو كلمة المرور غير صحيحة"."</p>";
@@ -73,9 +75,13 @@ if (mysqli_num_rows($results) > 0) {
  $id=$row['id'];
  $email=$row['email_address'];
  $SavedPass=$row['password'];
+ $salt = $row['salt'];
   }
   //check if password entered is equal hashed password in the database
-  if(password_verify($password, $SavedPass)){
+  // use hash function for Password encryption
+  $hashed_password = crypt($_POST['password'],$salt);
+  $bool=hash_equals($hashed_password,$SavedPass );
+  if($bool==1){
        //Create sesstion and redirect volunteer to program.php
        session_start();
        //save attribute is session array to use it later in authentication
@@ -83,7 +89,7 @@ if (mysqli_num_rows($results) > 0) {
        $_SESSION['id']=$id; 
        $_SESSION['email']=$email;
        $_SESSION['logged_in'] = true;
-       header("location:index.php");
+       header("location:home.php");
        
   }else{
        $message= "<p style='text-align: right; color:red; margin-top:20px;'>". "البريد الإلكتروني أو كلمة المرور غير صحيحة"."</p>";
@@ -109,13 +115,13 @@ if (mysqli_num_rows($results) > 0) {
                 <div class="card2 card border-0 px-4 py-5">
                     <div class="user-type">
                       <div class="radio-toolbar">
-    <input type="radio" id="radioVolunteer" name="user" value="volunteer" checked>
+    <input class="input" type="radio" id="radioVolunteer" name="user" value="volunteer" checked>
     <label for="radioVolunteer">متطوع</label>
 
-    <input type="radio" id="radioMemebr" name="user" value="member">
+    <input class="input" type="radio" id="radioMemebr" name="user" value="member">
     <label for="radioMemebr">عضو</label>
 
-    <input type="radio" id="radioSponsor" name="user" value="sponsor">
+    <input class="input" type="radio" id="radioSponsor" name="user" value="sponsor">
     <label for="radioSponsor">راعي</label> 
 </div>
                     </div>
@@ -127,12 +133,12 @@ if (mysqli_num_rows($results) > 0) {
                             <?php  echo $message;?>
                             <p id="error" style='text-align: right; color:red; margin-top:20px;'></p>
                             <h6 class="mb-0 text-sm">البريد الإلكتروني</h6>
-                        </label> <input class="mb-4" type="email" name="email" id="email" placeholder="example@x.com" required > </div>
+                        </label> <input class="mb-4 input" type="email" name="email" id="email" placeholder="example@email.com" > </div>
                     <div class="row px-3"> <label class="mb-1">
                             <h6 class="mb-0 text-sm">كلمة المرور</h6>
-                        </label> <input type="password" name="password" id="pass" placeholder="ادخل كلمة المرور" required> </div>
+                        </label> <input class="input" type="password" name="password" id="pass" placeholder="مثال ......."> </div>
                     <div class="row px-3 mb-4 forget">
-                    <a href="#" class="ml-auto mb-0 text-sm">نسيت كلمة المرور ؟</a>
+                    <a href="forgetpass1.php" class="ml-auto mb-0 text-sm">نسيت كلمة المرور ؟</a>
                     </div>
                     <div class="row mb-3 px-3"> <button type="submit" class="btn text-center" name="log" onfocus="Validation()" >تسجيل دخول</button> </div>
                     <div class="row mb-4 px-3 insertAccount"> <small class="font-weight-bold">ليس لديك حساب ؟ <a class="text-danger " href="index.php">إنشاء حساب</a></small> </div>
@@ -147,153 +153,6 @@ if (mysqli_num_rows($results) > 0) {
         </div>
     </div>
 </div>
-    
-    <style>
-
-@media screen and (max-width: 991px) {
-
-    .image {
-        width: 300px;
-        height: 220px
-    }
-
-    .border-line {
-        border-right: none
-    }
-    .row.d-flex{
-        display: flex;
-        flex-direction: column-reverse;
-    }
-    .card1 {
-        border-top: 1px solid #EEEEEE !important;
-        margin: 0px 15px
-    }
-}
-input:focus,
-textarea:focus {
-    -moz-box-shadow: none !important;
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    border: 1px solid #9b59b6;
-    outline-width: 0
-}
-
-.forget, .insertAccount{
-    margin-top: 10px;
-      margin-bottom: 15px;
-}
-.btn {
-    background-color: #009999;
-    width: 150px;
-    color: #fff;
-    border-radius: 6px
-}
-.btn:hover{
-    color: #fff;
-    opacity: 0.9;
-}
-placeholder {
-    color: #9b59b6;
-    opacity: 1;
-    font-weight: 300
-}
-
--ms-input-placeholder {
-    color: #9b59b6;
-    font-weight: 300
-}
-.container-fluid{
-    margin-top: 100px;
-}
-
-input,
-textarea {
-    padding: 10px 12px 10px 12px;
-    border: 1px solid lightgrey;
-    border-radius: 2px;
-    margin-bottom: 5px;
-    margin-top: 2px;
-    width: 100%;
-    box-sizing: border-box;
-    color: #583e69;
-    font-size: 14px;
-    letter-spacing: 1px
-}
-.line {
-    height: 1px;
-    width: 45%;
-    background-color: #E0E0E0;
-}
-
-
-.text-sm {
-    font-size: 14px !important
-}
-.card0 {
-    box-shadow: 0px 4px 8px 0px #757575;
-    border-radius: 0px;
-}
-
-.card2 {
-    margin: 0px 40px;
-}
-
-
-.image {
-    width: auto;
-    height: 280px;
-    margin-right: 40px;
-}
-
-.border-line {
-    border-left: 1px solid #EEEEEE;
-    margin-top: 15px;
-}
-
-.user-type{
-    margin-right: -35px;
-}
-.radio-toolbar {
-  margin: 30px;
-
-}
-
-.radio-toolbar input[type="radio"] {
-  opacity: 0;
-  position: fixed;
-  width: 0;
-}
-
-.radio-toolbar label {
-    display: inline-block;
-    width:  80px;
-  height: 35px;
-  border-radius:  24px; 
-  text-align:  center; 
-  padding:  4px 12px; 
-  color: #009999; 
-  background-color: white;
-  font-size:  16px;
-  font-weight: 100;
-  border: 1.2px solid #009999;
-    cursor: pointer;
-      white-space: nowrap;
- 
-}
-
-.radio-toolbar label:hover {
-  background-color: #dfd;
-}
-
-
-.radio-toolbar input[type="radio"]:checked + label {
-    background-color: #009999;
-    opacity: 0.8;
-    color:#fff;
-    
-}
-
-    </style>
    <element dir="ltr">
       <?php require 'layout/footer.php';
 ?>

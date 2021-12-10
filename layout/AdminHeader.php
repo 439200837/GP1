@@ -33,13 +33,13 @@
 						<a href="board.php">لوحة التحكم</a>
 					</li>
 					<li>
-						<a href="#">برامجنا</a>
+						<a href="programs.php">برامجنا</a>
 					</li>
 					<li>
-						<a href="#">من نحن</a>
+						<a href="about.php">من نحن</a>
 					</li>
                                         <li>
-						<a href="#">الرئيسة</a>
+						<a href="home.php">الرئيسة</a>
 					</li>
                                           <li id="SO">
 						<a href="#">تسجيل خروج</a>
@@ -51,9 +51,9 @@
                             
 			</div>
                      
-                    <button id='logout' type="submit"><a href="logOut.php">تسجيل خروج</a>
+                   <a href="logOut.php"> <button id='logout' type="submit">تسجيل خروج
                        <span class="glyphicon glyphicon-log-out" style="margin-left: 3px;"></span>
-                   </button>
+                   </button></a>
                     <!-- comment  <p>المستخدم</p>-->
                 
                    

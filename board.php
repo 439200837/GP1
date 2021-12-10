@@ -1,13 +1,16 @@
 <?php
  session_start();
- if($_SESSION['logged_in']!==true && $_SESSION['type']!=='member' ){
-     echo 'sorry ! you are not athorize to accecc this page'; 
-     header('location:log-in.php');
+ if($_SESSION['logged_in']===true && $_SESSION['type']==='member' && $_SESSION['id'] ==1 ){
+     require 'layout/AdminHeader.php';
+    
+ }else{
+    echo 'sorry ! you are not athorize to accecc this page'; 
+     header('location:log-in.php');  
  }
 //calling database conennction
 require 'config.php';
 //header 
-require 'layout/AdminHeader.php';
+
 // change title name
 echo "<script> document.title='لوحة التحكم' </script>";
 

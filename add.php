@@ -1,6 +1,14 @@
 <?php 
-//connect to the AdminHeader.php page and to config.php page
-require 'layout/AdminHeader.php'; 
+session_start();
+//check if user is admin or restrict him/her 
+if($_SESSION['logged_in']===true && $_SESSION['type'] ==='member' && $_SESSION['id'] ==1){
+    require 'layout/AdminHeader.php'; 
+ }
+ else{
+     echo 'sorry ! you are not athorize to access this page'; 
+     header('location:log-in.php'); 
+ }
+//connect to config.php page 
 require 'config.php';
 // change title name
 echo "<script> document.title='إضافة عضو' </script>";
@@ -15,14 +23,12 @@ echo "<script> document.title='إضافة عضو' </script>";
 
 if(isset($_POST['add'])){
   //define the variables
-    $pass1=$_POST["pass"];
   $first_name = $_POST['fname'];
   $last_name = $_POST['lname'];
   $email_address = $_POST['email'];
   $gender = $_POST['gender'];
     $phone_number = $_POST['phone'];
     $address = $_POST['address'];
-  $password = password_hash($_POST['pass'], PASSWORD_BCRYPT);
  //bring the phone number and email information to check if it has been stored before
   $sql_p = "SELECT * FROM member WHERE phone_number='$phone_number'";
   $sql_e = "SELECT * FROM member WHERE email_address='$email_address'";
@@ -35,8 +41,12 @@ if(isset($_POST['add'])){
         else if(mysqli_num_rows($res_e) > 0){
         echo "<p style=' text-align: right; color:red; margin-top:120px;'>". "نعتذر ، البريد الإلكتروني مستخدم من قبل عضو اخر يرجى تغيير البريد الإلكتروني"."</p>";
     }else{
-       //insert in member table
-       $query = "INSERT INTO member (email_address,password,first_name,last_name,gender,phone_number,address) VALUES ('$email_address','$password','$first_name','$last_name','$gender','$phone_number','$address')";
+     
+        //insert in member table
+          $b=uniqid();
+   $salt ='$6$rounds=5000'.$b;
+  $password = crypt($_POST['pass'],$salt);
+       $query = "INSERT INTO `member` (`email_address`, `password`, `salt`, `first_name`, `last_name`, `gender`, `phone_number`, `address`) VALUES ('$email_address','$password','$salt','$first_name','$last_name','$gender','$phone_number','$address')";
         $results = mysqli_query($connection, $query);
        
                  if ( false===$results ) {
@@ -106,7 +116,7 @@ if(isset($_POST['add'])){
 
   
     <!-- Form that will appear to user -->
-    <body class="reg" onchange="my();" >
+    <body class="reg" onkeyup="my();" >
         <div class="container5">
     <div class="title" dir="rtl">إضافة الأعضاء</div>
     <div class="content">
@@ -114,13 +124,13 @@ if(isset($_POST['add'])){
         <div class="user-details">
             <div class="input-box">
             <span class="details" dir="rtl">الأسم الأول</span> 
-           <input type="text" name="fname" id="fname" onchange="ValidateName() " placeholder="ادخل الاسم الاول" dir="rtl" required="required">
+           <input type="text" name="fname" id="fname" onkeyup="ValidateName() " placeholder="ادخل الاسم الاول" dir="rtl" required="required">
             <p id="er6" style="color: red;"></p>
           </div>
             
              <div class="input-box">
             <span class="details" dir="rtl">الأسم الثاني</span>
-            <input type="text" name="lname" id="lname" onchange="ValidateName()" placeholder="ادخل الاسم الثاني" dir="rtl" required="required">
+            <input type="text" name="lname" id="lname" onkeyup="ValidateName()" placeholder="ادخل الاسم الثاني" dir="rtl" required="required">
             <p id="er7" style="color: red;"></p>
           </div>
             
@@ -136,25 +146,25 @@ if(isset($_POST['add'])){
           </div>
             <div class="input-box">
             <span class="details" dir="rtl">تأكيد كلمة السر</span>
-            <input type="text" name="confirmpass" id="confirmpass" onchange="ValidatePassword()"  placeholder="ادخل تأكيد كلمة السر" dir="rtl" required="required">
+            <input type="text" name="confirmpass" id="confirmpass" onkeyup="ValidatePassword()"  placeholder="ادخل تأكيد كلمة السر" dir="rtl" required="required">
              <p id="er4" style="color: red;"></p>
           </div>
             <div class="input-box">
             <span class="details" dir="rtl">البريد الالكتروني</span>
-            <input type="email" name="email" id="email" onchange="ValidateEmail()" placeholder="ادخل البريد الإلكتروني" dir="rtl" required="required">
+            <input type="email" name="email" id="email" onkeyup="ValidateEmail()" placeholder="ادخل البريد الإلكتروني" dir="rtl" required="required">
             <p id="er" style="color: red;"></p>
           </div>
          
           <div class="input-box">
             <span class="details" dir="rtl">رقم الهاتف</span>
-            <input type="number"  onchange="ValidatePhone()" name="phone" id="phone" placeholder="05XXXXXXXX" dir="rtl" required="required">
+            <input type="number"  onkeyup="ValidatePhone()" name="phone" id="phone" placeholder="05XXXXXXXX" dir="rtl" required="required">
             <p id="er5" style="color: red;"></p>
           </div>
          
             
             <div class="input-box">
             <span class="details" dir="rtl">العنوان</span>
-            <input type="text" name="address" onchange="ValidateName()" id="address" placeholder="المدينة، الحي، الشارع"  dir="rtl" required="required">
+            <input type="text" name="address" onkeyup="ValidateName()" id="address" placeholder="المدينة، الحي، الشارع"  dir="rtl" required="required">
            <p id="er8" style="color: red;"></p>
             </div>
             
@@ -280,7 +290,7 @@ if(isset($_POST['add'])){
         }
         //Validate phone number if it begin with 0 and its length 10
            function ValidatePhone() {
-      var regex="^0[0-9]{9}$";
+      var regex="^05[0-9]{8}$";
       var phone = document.getElementById("phone").value;
          if (!phone.match(regex)){
                  document.getElementById("er5").innerHTML="ادخل رقم الهاتف بالشكل الصحيح";

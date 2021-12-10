@@ -10,7 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" href="css/style.css"> 
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="css/style.css?<?php echo time(); ?>"> 
       <script src="js/script.js"></script>
     </head>
  
@@ -30,13 +31,16 @@
 				<ul class="site-navigation nav">
 					
 					<li>
-						<a href="#">برامجنا</a>
+						<a href="programs.php">برامجنا</a>
 					</li>
 					<li>
-						<a href="#">من نحن</a>
+						<a href="about.php">من نحن</a>
 					</li>
                                         <li>
-						<a href="#">الرئيسة</a>
+						<a href="home.php">الرئيسة</a>
+					</li>
+                                         <li id="SI">
+						<a href="logOut.php">تسجيل خروج</a>
 					</li>
 				
                                         
@@ -44,11 +48,10 @@
           </ul>
                             
 			</div>
-                     
-                    <button id='logout' type="submit"><a href="logOut.php">تسجيل خروج</a>
-                        <span class="glyphicon glyphicon-log-out" style="margin-left: 3px;"></span>
-                   </button>
-                    <p>المستخدم</p>
+                   <a href="logOut.php"> <button id='logout' type="submit">تسجيل خروج
+                       <span class="glyphicon glyphicon-log-out" style="margin-left: 3px;"></span>
+                   </button></a>
+                 
                 
                    
 		</nav>

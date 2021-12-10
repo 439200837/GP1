@@ -1,6 +1,16 @@
-<?php require 'layout/AdminHeader.php'; 
+<?php
+session_start();
+//check if user is admin or restrict him/her 
+if($_SESSION['logged_in']===true && $_SESSION['type'] ==='member' && $_SESSION['id'] ==1){
+    require 'layout/AdminHeader.php'; 
+ }
+ else{
+     echo 'sorry ! you are not athorize to access this page'; 
+     header('location:log-in.php'); 
+ }
+ 
 require 'config.php';
-$id=@$_GET['id'];
+$id=$_GET['id'];
  // change title name
 echo "<script> document.title='تعديل بيانات المتطوع' </script>";
 ?>
@@ -180,7 +190,7 @@ function ValidateEmail() {
 
 }
  function ValidatePhone() {
-var regex="^0[0-9]{9}$";
+var regex="^05[0-9]{8}$";
 var phone = document.getElementById("phone").value;
 if (!phone.match(regex)){
        document.getElementById("er5").innerHTML="ادخل رقم الهاتف بالشكل الصحيح";
@@ -295,10 +305,8 @@ foreach($preferences as $preference)
 echo "<br>";
 $query_update = mysqli_query( $connection, $sql_update);
  
-if($query_update==false){
-echo "Error";
+if(mysqli_affected_rows($connection) >0){
 
-}else{
               if (isset($_POST['preference1'])){ $preference1 = $_POST['preference1'];
     $query2="INSERT INTO `preference`(`Preferences`, `Vemail_address`) VALUES ('$preference1','$email_address') ON DUPLICATE key
   UPDATE  `Preferences`='$preference1'";
@@ -359,6 +367,8 @@ echo "Error";
 
                  </script>";
 
+}else{
+   echo  "<p style='text-align: right; color:red; margin-top:120px;'>"."نعتذر ،حدث خطأ"."</p>";  
 }
 
 }?>

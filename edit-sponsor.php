@@ -1,4 +1,14 @@
-<?php require 'layout/AdminHeader.php';
+<?php
+session_start();
+//check if user is admin or restrict him/her 
+if($_SESSION['logged_in']===true && $_SESSION['type'] ==='member' && $_SESSION['id'] ==1){
+    require 'layout/AdminHeader.php'; 
+ }
+ else{
+     echo 'sorry ! you are not athorize to access this page'; 
+     header('location:log-in.php'); 
+ }
+
 require 'config.php';
 $id=@$_GET['id'];
     // change title name

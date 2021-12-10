@@ -16,7 +16,10 @@ if(isset($_POST['add'])){
     $address = $_POST['address'];
     $educational_level = $_POST['educational_level'];
 // use hash function for Password encryption
-  	$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+   $b=uniqid();
+   $salt ='$6$rounds=5000'.$b;
+ $hashed_password = crypt($_POST['password'],$salt);
+  //hash_equals($hashed_password, $SavedPass);
 //bring the phone number and email information to check if it has been stored before
   	$sql_p = "SELECT * FROM volunteer WHERE phone_number='$phone_number'";
   	$sql_e = "SELECT * FROM volunteer WHERE email_address='$email_address'";
@@ -30,8 +33,8 @@ if(isset($_POST['add'])){
         echo "<p style='text-align: right; color:red; margin-top:120px;'>". "نعتذر ، البريد الإلكتروني مستخدم من قبل عضو اخر يرجى تغيير البريد الإلكتروني"."</p>";
     }else{
       //insert into the volunteer table in database
-       $query = "INSERT INTO `volunteer` (email_address,first_name,last_name,gender,dateOfBirth,phone_number,address,cumlativeRating,educational_level,password)
-	 VALUES ('$email_address','$first_name','$last_name','$gender','$dateOfBirth','$phone_number','$address','0.00','$educational_level','$password')";
+       $query = "INSERT INTO `volunteer` (email_address,first_name,last_name,gender,dateOfBirth,phone_number,address,cumlativeRating,educational_level,password,salt)
+	 VALUES ('$email_address','$first_name','$last_name','$gender','$dateOfBirth','$phone_number','$address','0.00','$educational_level','$hashed_password','$salt')";
         $results = mysqli_query($connection, $query);
 
            if($results){

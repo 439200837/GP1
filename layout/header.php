@@ -30,27 +30,27 @@
 			<div class="collapse navbar-collapse navbar-1">
 				<ul class="site-navigation nav">
                                     <li id="firstt">
-						<a href="#">برامجنا</a>
+						<a href="programs.php">برامجنا</a>
 					</li>
 					<li>
-						<a href="#">من نحن</a>
+						<a href="about.php">من نحن</a>
 					</li>
 					<li>
-						<a href="#">الرئيسة</a>
+						<a href="home.php">الرئيسة</a>
 					</li>
 				 <li id="SU">
-						<a href="#">إنشاء حساب</a>
+						<a href="index.php">إنشاء حساب</a>
 					</li>
                                          <li id="SI">
-						<a href="#">تسجيل دخول</a>
+						<a href="log-in.php">تسجيل دخول</a>
 					</li>
                                         
 					
           </ul>
                             
 			</div>
-                    <button id='log' type="submit"><a href="log-in.php">تسجيل دخول</a></button>
-                    <button id='signUp' type="submit"><a href="index.php">إنشاء حساب</a></button>
+                   <a href="log-in.php"> <button id='log' type="submit">تسجيل دخول</button></a>
+                   <a href="index.php"> <button id='signUp' type="submit">إنشاء حساب</button></a>
 		</nav>
            
             

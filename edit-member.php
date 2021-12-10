@@ -1,6 +1,16 @@
-<?php require 'layout/AdminHeader.php';
+<?php
+session_start();
+//check if user is admin or restrict him/her 
+if($_SESSION['logged_in']===true && $_SESSION['type'] ==='member' && $_SESSION['id'] ==1){
+    require 'layout/AdminHeader.php'; 
+ }
+ else{
+     echo 'sorry ! you are not athorize to access this page'; 
+     header('location:log-in.php'); 
+ }
+
 require 'config.php';
-$id=@$_GET['id'];
+$id=$_GET['id'];
  // change title name
 echo "<script> document.title='تعديل بيانات العضو' </script>";
 ?>
@@ -17,7 +27,7 @@ echo "<script> document.title='تعديل بيانات العضو' </script>";
        
        
    </header>
-    <body class="reg" onchange="mm()">
+    <body class="reg" onkeyup="mm()">
         <div class="container5">
     <div class="title" dir="rtl">تعديل معلومات الاعضاء</div>
     <div class="content">
@@ -35,13 +45,13 @@ echo "<script> document.title='تعديل بيانات العضو' </script>";
         <div class="user-details">
               <div class="input-box">
             <span class="details" dir="rtl">الاسم الأول</span>
-            <input type="text" placeholder="ادخل الاسم الاول" dir="rtl"  id="fname"  onchange="ValidateNameMember()"  name="first_name" value="<?= $row['first_name']?>">
+            <input type="text" placeholder="ادخل الاسم الاول" dir="rtl"  id="fname"  onkeyup="ValidateNameMember()"  name="first_name" value="<?= $row['first_name']?>">
             <p id="er6" style="color: red;"></p>
 
           </div>
           <div class="input-box">
             <span class="details" dir="rtl">الاسم الثاني</span>
-            <input type="text" placeholder="ادخل الاسم الثاني" id="lname" onchange="ValidateNameMember()"  name="last_name" value="<?= $row['last_name']?>" dir="rtl">
+            <input type="text" placeholder="ادخل الاسم الثاني" id="lname" onkeyup="ValidateNameMember()"  name="last_name" value="<?= $row['last_name']?>" dir="rtl">
             <p id="er7" style="color: red;"></p>
 
           </div>
@@ -49,13 +59,13 @@ echo "<script> document.title='تعديل بيانات العضو' </script>";
    
           <div class="input-box">
             <span class="details" dir="rtl">البريد الإلكتروني</span>
-            <input type="email" placeholder="mail@example.com" dir="rtl" id="email" onchange="ValidateEmail()"  name="email_address" value="<?=$row['email_address']?>">
+            <input type="email" placeholder="mail@example.com" dir="rtl" id="email" onkeyup="ValidateEmail()"  name="email_address" value="<?=$row['email_address']?>">
             <p id="er" style="color: red;"></p>
 
           </div>
           <div class="input-box">
             <span class="details" dir="rtl">رقم الهاتف</span>
-            <input type="tel" placeholder="05XXXXXXXX" id="phone"  onchange="ValidatePhone()"  dir="rtl" name="phone_number" value="<?= $row['phone_number']?>">
+            <input type="tel" placeholder="05XXXXXXXX" id="phone"  onkeyup="ValidatePhone()"  dir="rtl" name="phone_number" value="<?= $row['phone_number']?>">
             <p id="er5" style="color: red;"></p>
 
           </div>
@@ -63,7 +73,7 @@ echo "<script> document.title='تعديل بيانات العضو' </script>";
             
             <div class="input-box">
             <span class="details" dir="rtl">العنوان</span>
-            <input type="text" placeholder="المدينة ، الحي ، الشارع" id="address" dir="rtl" onchange="ValidateNameMember()"  name="address" value="<?= $row['address']?>">
+            <input type="text" placeholder="المدينة ، الحي ، الشارع" id="address" dir="rtl" onkeyup="ValidateNameMember()"  name="address" value="<?= $row['address']?>">
             <p id="er8" style="color: red;"></p>
 
           </div>
@@ -208,16 +218,12 @@ if(isset($_POST['edit'])){
 $query_update = mysqli_query( $connection, $sql_update);
 //if run query get error echo eles redirect back
 
-if($query_update==false){
-echo "Error";
-
-}else{
-
-   echo "<script>
+if(mysqli_affected_rows($connection) >0){
+ echo "<script>
            
                 Swal.fire({
                      icon: 'success',
-                     title: 'تم تعديل بيانات العضو بنجاح',
+                     title: 'تم تعديل معلومات العضو بنجاح',
                      text: '',
                      showConfirmButton: true,
                      confirmButtonText:'إغلاق ',
@@ -228,6 +234,9 @@ echo "Error";
                          })
 
                  </script>";
+
+}else{
+      echo  "<p style='text-align: right; color:red; margin-top:120px;'>"."نعتذر ،حدث خطأ"."</p>"; 
 
 }
 
