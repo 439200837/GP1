@@ -1,4 +1,7 @@
 # تطوَّع
+Our project is تطوّع it is a web-based application that will facilitate the work of the taj volunteer club and give people the opportunity to volunteer, support or to review the newly updated volunteer programs as they hold several types of programs ranging from educational, entertainment, health, psychological, social, awareness, relief, and development, to all segments of society of different levels, classes, interests, and ages. Some of the programs are held yearly, monthly and others are held as needed.
+
+
 Languages used for this project: PHP, Javascript, CSS, HTML, SQL
 Labraries: PHPMailer
 
