@@ -1,4 +1,11 @@
-  
+ <?php
+session_start();
+$name=$_SESSION['name'];
+$id=$_SESSION['id'];
+$email=$_SESSION['email'];
+
+
+ ?> 
 <html>
      <head>
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,7 +36,15 @@
 			</div>
 			<div class="collapse navbar-collapse navbar-1">
 				<ul class="site-navigation nav">
-					
+					<li>
+					<?php
+					if($_SESSION['logged_in']===true && $_SESSION['type'] ==='member'){
+					?>
+						<a href="volenteerProgram.php"><i class="fa fa-bell"></i></a>
+					<?php }else{ ?>
+						<a href="volenteerShowProgram.php"><i class="fa fa-bell"></i></a>
+						<?php } ?>
+					</li>
 					<li>
 						<a href="programs.php">برامجنا</a>
 					</li>
@@ -48,6 +63,16 @@
           </ul>
                             
 			</div>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-caret-down" aria-hidden="true"></i><a> أهلا
+    <?php echo $name;?> </a>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <element dir="rtl">
+          <a href="edit-volunteer.php?id=<?php echo $id;?>&email=<?php echo $email;?>"><button class="dropdown-item"  type="button">تعديل معلومات الحساب </button></a>
+    <button class="dropdown-item"  type="button">الحساب</button>
+  </div>
+</div>
                    <a href="logOut.php"> <button id='logout' type="submit">تسجيل خروج
                        <span class="glyphicon glyphicon-log-out" style="margin-left: 3px;"></span>
                    </button></a>

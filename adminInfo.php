@@ -12,11 +12,11 @@
    <button id="displayM" class="display" type="button">الأعضاء</button>
       <button id="displayV" class="display" type="button">المتطوعين</button>
       <button id="displayS" class="display" type="button">الرعاة</button>
-        <button id="displayA" class="display" type="button">المشرفين</button>
+       <button id="displayA" class="display" type="button">المشرفين</button>
   </div>
 </div>
             
-             <a href="add.php" id="addB" <button class="button" type="button">إضافة عضو</button></a>
+             <a href="addAdmin.php" id="addB" <button class="button" type="button">إضافة مشرف</button></a>
             
         </div>
     
@@ -28,7 +28,7 @@
              <?php
    
             echo
-      '<td class="column1">اسم العضو </td>'
+      '<td class="column1">اسم المشرف </td>'
            .'<td class="column2">البريد الإلكتروني</td>'.'<td class="column3">رقم الهاتف</td>'.
 		'<td class="column4">الجنس</td>'.
                 '<td class="column4">التعديل</td>'.
@@ -36,7 +36,7 @@
             </thead>';
             
             
-                    $sql="SELECT * FROM member";
+                    $sql="SELECT * FROM admin";
           $result = mysqli_query( $connection, $sql);
           $list = array();
 if (mysqli_num_rows($result) > 0) {
@@ -57,22 +57,13 @@ if (mysqli_num_rows($result) > 0) {
   }
                   }
                   
+                    
              
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-             
-           echo '</tbody> 
+                  echo '</tbody> 
             
         </table>
-   
+        
+
                   
  <script type="text/javascript">
 
@@ -121,7 +112,7 @@ if (mysqli_num_rows($result) > 0) {
     });
 });
 
- $("#displayA").click(function() {                
+$("#displayA").click(function() {                
 
       $.ajax({    //create an ajax request to display.php
         type: "GET",
@@ -134,11 +125,9 @@ if (mysqli_num_rows($result) > 0) {
 
     });
 });
-
 });
-
-
-
+                  
+ 
 $(document).ready(function(){';
 		
 echo "$(document).on('click', '#delete_user', function(e){
@@ -165,13 +154,13 @@ echo "$(document).on('click', '#delete_user', function(e){
   if (result.isConfirmed) {
      $.ajax({    //create an ajax request 
         type: 'POST',
-        url: 'delete.php',
+        url: 'deleteS.php',
         data: {email:email},
         dataType: 'html',   //expect html to be returned                
         success: function(response){                    
             Swal.fire(
       response,
-      'تم حذف بيانات العضو بنجاح',
+      'تم حذف بيانات الراعي بنجاح',
       'success'    
     ).then((result) => {
         location.reload(true); 
@@ -188,5 +177,8 @@ echo "$(document).on('click', '#delete_user', function(e){
 		
 	}
 });
-</script>";
 
+</script> ";                
+
+                  
+  

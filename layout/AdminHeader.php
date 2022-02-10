@@ -1,4 +1,10 @@
-  
+   <?php
+session_start();
+$name=$_SESSION['name'];
+$id=$_SESSION['id'];
+$email=$_SESSION['email'];
+
+ ?> 
 <html>
     
    <head>
@@ -29,7 +35,10 @@
 			</div>
 			<div class="collapse navbar-collapse navbar-1">
                             <ul class="site-navigation nav" id="myLinks">
-                                    <li id="top">
+                                    <a href="volenteerProgram.php"><i class="fa fa-bell"></i></a>
+					
+					</li>
+                                <li id="top">
 						<a href="board.php">لوحة التحكم</a>
 					</li>
 					<li>
@@ -50,7 +59,19 @@
           </ul>
                             
 			</div>
-                     
+                            <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-caret-down" aria-hidden="true"></i><a> أهلا
+    <?php echo $name;?> </a>
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+      <element dir="rtl">
+          <a href="edit.php?id=<?php echo $id;?>&email=<?php echo $email;?>"><button class="dropdown-item"  type="button">تعديل معلومات الحساب </button></a>
+    <button class="dropdown-item"  type="button">الحساب</button>
+  </div>
+</div> 
+                    
+                    
+                    
                    <a href="logOut.php"> <button id='logout' type="submit">تسجيل خروج
                        <span class="glyphicon glyphicon-log-out" style="margin-left: 3px;"></span>
                    </button></a>

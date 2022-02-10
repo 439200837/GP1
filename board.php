@@ -1,12 +1,12 @@
 <?php
  session_start();
- if($_SESSION['logged_in']===true && $_SESSION['type']==='member' && $_SESSION['id'] ==1 ){
+// if($_SESSION['logged_in']===true && $_SESSION['type']==='member' && $_SESSION['id'] ==1 ){
      require 'layout/AdminHeader.php';
     
- }else{
-    echo 'sorry ! you are not athorize to accecc this page'; 
-     header('location:log-in.php');  
- }
+ //}else{
+   // echo 'sorry ! you are not athorize to accecc this page'; 
+   //  header('location:log-in.php');  
+// }
 //calling database conennction
 require 'config.php';
 //header 
@@ -30,6 +30,7 @@ echo "<script> document.title='لوحة التحكم' </script>";
       <button id="displayM" class="display" type="button">الأعضاء</button>
       <button id="displayV" class="display" type="button">المتطوعين</button>
       <button id="displayS" class="display" type="button">الرعاة</button>
+      <button id="displayA" class="display" type="button">المشرفين</button>
   </div>
 </div>
             <!-- add button -->
@@ -145,6 +146,21 @@ if (mysqli_num_rows($result) > 0) {
     });
 });
  
+    $("#displayA").click(function() {                
+
+      $.ajax({    //create an ajax request to sponsorInfo.php
+        type: "GET",
+        url: "adminInfo.php",             
+        dataType: "html",   //expect html to be returned                
+        success: function(response){                    
+            $("#responsecontainer").html(response); 
+            //alert(response);
+        }
+
+    });
+});
+
+
 });
 
 //delete users using jQuery (POST)

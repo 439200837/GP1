@@ -63,7 +63,7 @@ $Vcode= $_SESSION["rand"];
 	if ( $mail->send() ) {
         $message="<p style='text-align: right; margin-top:20px;'>". "تم إرسال رمز التحقق إلى البريد الإلكتروني : ".$email_address."</p>";
 	}else{
-		echo "Message could not be sent. Mailer Error: "{$mail->ErrorInfo};
+	$message="<p style='text-align: right; margin-top:20px;'>"."$mail->ErrorInfo"."</p>";
 	}
 if(isset($_POST['verfiy'])){
     $code=$_POST['code'];

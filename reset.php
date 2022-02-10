@@ -10,8 +10,8 @@ echo "<script> document.title='إعادة تعيين كلمة المرور' </sc
 $message="";
 $email_address=$_GET['email'];
 if(isset($_POST['log'])){
-     $user_type = $_POST['user'];
-    if($user_type==='member'){
+     //$user_type = $_POST['user'];
+    if($_SESSION["type"]==='member'){
       $email=$_POST['email'];
      //bring the email information to check if it has been stored before
   	$sql_e = "SELECT * FROM `member` WHERE `email_address`='$email'";
@@ -64,7 +64,7 @@ $message= "<p style='text-align: right; color:red; margin-top:20px;'>"."حدث �
         
         
     }//end if user is member
-    elseif ($user_type==='volunteer') {
+    elseif ($_SESSION["type"]==='volunteer') {
         $Vemail=$_POST['email'];
        //bring the email information to check if it has been stored before
   	$sql_e = "SELECT * FROM `volunteer` WHERE `email_address`='$Vemail'";
@@ -133,18 +133,10 @@ $message= "<p style='text-align: right; color:red; margin-top:20px;'>"."حدث �
                 <div class="line"></div>
                     <div class="user-type">
                       <div class="radio-toolbar">
-    <input class="input" type="radio" id="radioVolunteer" name="user" value="volunteer" checked>
-    <label for="radioVolunteer">متطوع</label>
-
-    <input class="input" type="radio" id="radioMemebr" name="user" value="member">
-    <label for="radioMemebr">عضو</label>
-
-    <input class="input" type="radio" id="radioSponsor" name="user" value="sponsor">
-    <label for="radioSponsor">راعي</label> 
 </div>
                     </div>
                     <div class="row px-3 mb-4">
-                        <div class="line"></div>
+                  
                     </div>
                      
                     <div class="row px-3"> <label class="mb-1">
@@ -164,7 +156,7 @@ $message= "<p style='text-align: right; color:red; margin-top:20px;'>"."حدث �
                     </div>
                         <div class="row px-3"> <label class="mb-1">
                             <h6 class="mb-0 text-sm">تأكيد كلمة المرور</h6>
-                        </label> <input class="input" onchange="ValidatePassword()" type="password" id="txtConfirmPassword" name="conPassword" id="pass" placeholder="ادخل تأكيد كلمة المرور" required>
+                            </label> <input class="input" onkeyup="ValidatePassword()" type="password" id="txtConfirmPassword" name="conPassword" id="pass" placeholder="ادخل تأكيد كلمة المرور" required>
                         <p id="er4" style="color: red;"></p>
                         </div>
                     <input class="input" type="hidden" name="email" value="<?=$email_address?>">
@@ -210,51 +202,56 @@ if(email==="" || pass===""){
             var password = document.getElementById("txtPassword").value;
             var confirmPassword = document.getElementById("txtConfirmPassword").value;
               if (!password.match(upperCaseLetters)){
-                 document.getElementById("upper").innerHTML="-يجب أن تحتوي على حرف كبير   <br>";
+                  document.getElementById("upper").innerHTML="<li class='fa fa-remove'></li>"+"-يجب أن تحتوي على حرف كبير   <br>";
                   document.getElementById("txtPassword").style.borderColor="red";
                    document.getElementById("upper").style.color="red";
                    count++;
              }else{
+                 document.getElementById("upper").innerHTML="<li class='fa fa-check'></li>"+"-يجب أن تحتوي على حرف كبير   <br>";
                 document.getElementById("upper").style.color="green";
                 document.getElementById("txtPassword").style.borderColor="#9b59b6";
                  count--;
              }
                if (!password.match(lowerCaseLetters)){
-                 document.getElementById("lower").innerHTML="-يجب أن تحتوي على حرف صغير   <br>";
+                   document.getElementById("lower").innerHTML="<li class='fa fa-remove'></li>"+"- يجب أن تحتوي على حرف صغير<br>";
                   document.getElementById("txtPassword").style.borderColor="red";
                    document.getElementById("lower").style.color="red";
                    count++;
              }else{
+                document.getElementById("lower").innerHTML="<li class='fa fa-check'></li>"+"- يجب أن تحتوي على حرف صغير<br>";
                 document.getElementById("lower").style.color="green";
                 document.getElementById("txtPassword").style.borderColor="#9b59b6";
                  count--;
              }
                  if (!password.match(numbers)){
-                 document.getElementById("num").innerHTML="-يجب أن تحتوي على رقم   <br>";
+                  document.getElementById("num").innerHTML="<li class='fa fa-remove'></li>"+"-يجب أن تحتوي على رقم   <br>";
                   document.getElementById("txtPassword").style.borderColor="red";
                    document.getElementById("num").style.color="red";
                    count++;
              }else{
+                document.getElementById("num").innerHTML="<li class='fa fa-check'></li>"+"-يجب أن تحتوي على رقم   <br>";
                 document.getElementById("num").style.color="green";
                 document.getElementById("txtPassword").style.borderColor="#9b59b6";
                  count--;
              }
               if (!password.match(symbol)){
-                 document.getElementById("symbol").innerHTML="-يجب أن تحتوي على علامة خاصة   <br>";
+                  document.getElementById("symbol").innerHTML="<li class='fa fa-remove'></li>"+"-يجب أن تحتوي على علامة خاصة   <br>";
                   document.getElementById("txtPassword").style.borderColor="red";
                    document.getElementById("symbol").style.color="red";
                    count++;
              }else{
+                document.getElementById("symbol").innerHTML="<li class='fa fa-check'></li>"+"-يجب أن تحتوي على علامة خاصة   <br>";
                 document.getElementById("symbol").style.color="green";
                 document.getElementById("txtPassword").style.borderColor="#9b59b6";
                  count--;
              }
                if (password.length < 8){
-                 document.getElementById("8char").innerHTML="-يجب أن تتكون من 8 خانات   <br>";
+                  document.getElementById("8char").innerHTML="<li class='fa fa-remove'></li>"+"-يجب أن تتكون من 8 خانات   <br>";
                   document.getElementById("txtPassword").style.borderColor="red";
                    document.getElementById("8char").style.color="red";
                    count++;
              }else{
+                document.getElementById("8char").innerHTML="<li class='fa fa-check'></li>"+"-يجب أن تتكون من 8 خانات   <br>";
                 document.getElementById("8char").style.color="green";
                 document.getElementById("txtPassword").style.borderColor="#9b59b6";
                  count--;
