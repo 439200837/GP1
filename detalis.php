@@ -48,24 +48,9 @@ echo "<script> document.title='تفاصيل البرنامج' </script>";
    if (isset($_GET['id'])) {
 //retrieve all the program's information of this id
   $sql="SELECT * FROM `program` where id='$id'";
-  $sql2 = "SELECT program.*, enroll.program_id, enroll.id, enroll.volenteer_id, enroll.status FROM program, enroll WHERE enroll.program_id = program.id ;";
           $result = mysqli_query( $connection, $sql);
-          $result2 = mysqli_query( $connection, $sql2);
   // output data of each row
-  while($row = mysqli_fetch_assoc($result)) {
-    $check = 0;
-    foreach($result2 as $tt){
-      if($row['id'] == $tt['program_id']){
-        if ($tt['status'] == 'قيد الانتظار') {
-          $check= 2;
-        } elseif ($tt['status'] == 'تمت الموافقة') {
-          $check= 3;
-        }else{
-          $check= 0;
-        }
-      }
-    }
-    ?>
+  while($row = mysqli_fetch_assoc($result)) {?>
       
     <div class="fakeimg">
          <?php 
@@ -97,10 +82,6 @@ echo "<script> document.title='تفاصيل البرنامج' </script>";
       </div> 
     </div>
         <br>
-        <br>
-        <br>
-        <br>
-        <br>
          <hr class="lineP"></hr>
         
              
@@ -112,21 +93,7 @@ echo "<script> document.title='تفاصيل البرنامج' </script>";
                    //retrieve the description of the program
                    echo $row['description']?> </p>
                    <!-- a button to enroll in a program -->
-                   <?php
-                   if($check == '0'){
-         ?>
-              <form action="programs.php" method="POST" style="margin-top: 14px;">
-                <input type="hidden" name="volenteer_id" value="<?= $_SESSION['id']; ?>">
-                <input type="hidden" name="program_id" value="<?= $row['id'] ?>">
-                <input type="hidden" name="email_address" value="<?= $_SESSION['email_address'] ?>">
-                <button class="buttonP" type="submit" name="insert">انضم إلينا</button>
-              </form>
-              <?php }elseif($check == '2'){?>
-                <button class="buttonP">قيد انتظار القبول </button>
-              <?php }else{?>
-                <button class="buttonP">تمت الموافقة</button>
-              <?php }?>
-                    <!-- <button id="enroll"  name="enroll" type="button" class="buttonP">انضم إلينا </button> -->
+                    <button id="enroll"  name="enroll" type="button" class="buttonP">انضم إلينا </button>
     </div>
    
   
@@ -154,3 +121,4 @@ echo "<script> document.title='تفاصيل البرنامج' </script>";
 ?>
     </body>
 </html>
+

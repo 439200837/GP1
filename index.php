@@ -120,29 +120,29 @@ if(isset($_POST['add'])){
         <div class="user-details">
 
             <div class="input-box">
-            <span class="details" dir="rtl">الاسم الأول*</span>
+            <span class="details" dir="rtl">الاسم الأول</span>
             <input type="text" onkeyup="ValidateName()" id="fname" placeholder="ادخل الاسم الاول" name="first_name" dir="rtl" required="required">
             <p id="er6" style="color: red;"></p>
             </div>
              <div class="input-box">
-            <span class="details" dir="rtl">اسم العائلة * </span>
+            <span class="details" dir="rtl">الاسم الثاني</span>
             <input type="text" onkeyup="ValidateName()" id="lname" name="last_name" placeholder="ادخل الاسم الثاني" dir="rtl" required="required">
            <p id="er7" style="color: red;"></p>
              </div>
 
 
             <div class="input-box">
-            <span class="details" dir="rtl">البريد الإلكتروني*</span>
+            <span class="details" dir="rtl">البريد الإلكتروني</span>
             <input type="email" onchange="ValidateEmail()" name="email_address" id="email" placeholder="mail@example.com"  dir="rtl" required="required">
             <p id="er" style="color: red;"></p>
           </div>
               <div class="input-box">
-            <span class="details" dir="rtl">تأكيد البريد الإلكتروني*</span>
+            <span class="details" dir="rtl">تأكيد البريد الإلكتروني</span>
             <input type="email" onkeyup="ValidateEmail()" id="ConfirmEmail" placeholder="mail@example.com"  dir="rtl" required="required">
             <p id="er2" style="color: red;"></p>
               </div>
                  <div class="input-box">
-            <span class="details" dir="rtl">كلمة المرور*</span>
+            <span class="details" dir="rtl">كلمة المرور</span>
             <input type="password" onkeyup="ValidatePassword()" onfocus="ValidatePassword()" id="txtPassword" name="password" placeholder="ادخل كلمة المرور"  dir="rtl" required="required">
             <p id="8char" style="color: red;"></p>
             <p id="upper" style="color: red;"></p>
@@ -151,12 +151,12 @@ if(isset($_POST['add'])){
             <p id="symbol" style="color: red;"></p>
                  </div>
           <div class="input-box">
-            <span class="details" dir="rtl">تأكيد كلمة المرور*</span>
+            <span class="details" dir="rtl">تأكيد كلمة المرور</span>
             <input onkeyup="ValidatePassword()" type="password" id="txtConfirmPassword" placeholder="ادخل تأكيد كلمة المرور"  dir="rtl" required="required">
            <p id="er4" style="color: red;"></p>
           </div>
                 <div class="input-box">
-            <span class="details" dir="rtl">تاريخ الميلاد*</span>
+            <span class="details" dir="rtl">تاريخ الميلاد</span>
             <input type="date" name="dateOfBirth" id="birth" placeholder="تاريخ الميلاد"  dir="rtl" required="required">
           </div>
 
@@ -164,7 +164,7 @@ if(isset($_POST['add'])){
           <input type="radio" name="gender" id="dot-1" value="ذكر" checked="checked">
           <input type="radio" name="gender" id="dot-2" value="أنثى">
 
-          <span class="gender-title" dir="rtl">الجنس*</span>
+          <span class="gender-title" dir="rtl">الجنس</span>
           <div class="category" >
               <ul style="list-style-type: none;">
                   <li><label for="dot-1">
@@ -184,176 +184,17 @@ if(isset($_POST['add'])){
 
         </div>
              <div class="input-box">
-            <span class="details" dir="rtl">رقم الهاتف*</span>
+            <span class="details" dir="rtl">رقم الهاتف</span>
             <input onkeyup="ValidatePhone()" type="number" name="phone_number"  id="phone" placeholder="05XXXXXXXX" " dir="rtl" required="required">
              <p id="er5" style="color: red;"></p>
              </div>
-               <div class="input-box">
-            <span class="details" dir="rtl"> الحي (مدينة الرياض) *</span>
-         <select name="address" id="address"  dir="rtl" required="required">
-  <option value="المغرزات">المغرزات</option>
-  
-  <option value="غرناطة">غرناطة</option>
-  
-  <option value="العقيق">العقيق</option>
-  
-  <option value="المروج">المروج</option> 
-  
-  <option value="الازدهار">الازدهار</option>
-  
-  <option value="الصحافة">الصحافة</option> 
-  
-  <option value="النخيل">النخيل</option>
-  
-  <option value="الملقا">الملقا</option> 
-  
-  <option value="الربيع">الربيع</option>
-  
-  <option value="النخيل الشرقي">النخيل الشرقي</option>
-  
-  <option value="النخيل الغربي">النخيل الغربي</option>
-  
-  <option value="الورود">الورود</option> 
-  
-  <option value="المرسلات">المرسلات</option>
-  
-  <option value="المروة">المروة</option> 
-  
-  <option value="الدار البيضاء">الدار البيضاء</option>
-  
-  <option value="العزيزية">العزيزية</option>
- <option value="شبرا">شبرا</option>
-  
-  <option value="الدريهمية">الدريهمية</option>  
-  
-  <option value="المنصورة">المنصورة</option>
-  
-  <option value="اليمامة">اليمامة</option> 
-  <option value="بدر">بدر</option>
-  
-  <option value="الفواز">الفواز</option> 
-  
-  <option value="نمار">الشفاء</option>
-  
-  <option value="المصانع">المصانع</option>
- <option value="الحاير">الحاير</option>
-  
-  <option value="الشميسي">الشميسي</option> 
-  
-  <option value="السويدي">السويدي</option>
-  
-  <option value="الشعلان">الشعلان</option>
-  
-  <option value="بن تركي">بن تركي</option>
-  
-  <option value="جامعة الملك سعود">جامعة الملك سعود</option>
-  
-  <option value="عرقة">عرقة</option>
-  
-  <option value="الدرعية">الدرعية</option> 
-  <option value="شبرا">شبرا</option>
-  
-  <option value="ظهرة البديعة">ظهرة البديعة</option> 
-  
-  <option value="العريجاء">العريجاء </option>
-  
-  <option value="البديعة">البديعة</option>
- <option value="القدس">القدس</option>
-  
-  <option value="الحمراء">الحمراء</option> 
-  
-  <option value="الريان">الريان</option>
-  
-  <option value="الروضة">الروضة</option>
-  
-  <option value="الشهداء">الشهداء</option>
-  
-  <option value="الفلاح">الفلاح</option>
- <option value="النسيم">النسيم</option>
-  
-  <option value="قرطبة">قرطبة</option> 
-  <option value="أشبيلية">أشبيلية</option>
-  
-  <option value="الرواد">الرواد</option> 
-  
-  <option value="الربوه">الربوه</option>
-  
-  <option value="الجزيرة">الجزيرة</option>
- <option value="اليرموك">اليرموك</option>
-  
-  <option value="الخليج">الخليج</option> 
-  
-  <option value="النهضة">النهضة</option>
-  
-  <option value="السلي">السلي</option>
-  
-  <option value="الملز">الملز</option>
-  
-  <option value="الديره">الديره</option>          
-  
-   <option value="المرقب">المرقب</option>
-  
-  <option value="البطحاء">البطحاء</option> 
-  <option value="الفاخرية">الفاخرية</option>
-  
-  <option value="المربع">المربع</option> 
-  
-  <option value="الصالحية">الصالحية</option>
-  
-  <option value="المونسية">المونسية</option>
- <option value="طويق">طويق</option>
-  
-  <option value="الرمال">الرمال</option> 
-  
-  <option value="العارض">العارض</option>
-  
-  <option value="اليرموك">اليرموك</option>
-  
-  <option value="السلام">السلام</option>
-  
-  <option value="الياسمين">الياسمين</option>
-  
- 
-  
-   <option value="الرائد">الرائد</option>
-  
-  <option value="العليا">العليا</option> 
-  <option value="الفلاح">الفلاح</option>
-  
-  <option value="التعاون">التعاون</option> 
-  
-  <option value="الخزامي">الخزامي</option>
-  
-  <option value="منفوحة">منفوحة</option>
- <option value="النزهة">النزهة</option>
-  
-  <option value="الواحة">الواحة</option> 
-  
-  <option value="النظيم">النظيم</option>
-  
-  <option value="الوادي">الوادي</option>
-  
-  <option value="الملك فهد">الملك فهد</option>
-  
-  <option value="الملك فيصل">الملك فيصل</option>
-
-<option value="الخالدية">الخالدية</option>
-  
-  <option value="السليمانية">السليمانية</option> 
-  <option value="حطين">حطين</option>
-  
-  <option value="أم سليم">أم سليم</option> 
-  
-  <option value="المصيف">المصيف</option>
-  
-  <option value="الطريف">الطريف</option>
- <option value="صلاح الدين">صلاح الدين</option>
-  
-  
-         </select>
-          </div>
+             <div class="input-box">
+            <span class="details" dir="rtl">العنوان</span>
+            <input type="text" onkeyup="ValidateName()"id="address" name="address" placeholder="المدينة ، الحي ، الشارع"  dir="rtl" required="required">
+            <p id="er8" style="color: red;"></p>
+             </div>
          <div class="input-box">
-            <span class="details" dir="rtl">المستوى التعليمي*</span>
+            <span class="details" dir="rtl">المستوى التعليمي</span>
          <select name="educational_level" id="edu"  dir="rtl" required="required">
   <option value="تعليم إبتدائي">تعليم إبتدائي</option>
   <option value="تعليم متوسط">تعليم متوسط</option>
@@ -366,13 +207,13 @@ if(isset($_POST['add'])){
             </select>
           </div>
               <div class="input-box">
-            <span class="details" dir="rtl">اسم التخصص *</span>
+            <span class="details" dir="rtl">اسم التخصص</span>
             <input type="text" onkeyup="ValidateName()" id="sp" name="specialization" placeholder="ادخل اسم التخصص"  dir="rtl" required="required">
             <p id="er9" style="color: red;"></p>
               </div>
           <div  dir="rtl" id="Skilll">
 
-        <span  dir="rtl" >ماذا تفضل ؟*</span><br><br>
+        <span  dir="rtl" >ماذا تفضل ؟</span><br><br>
         <input  type="checkbox" name="preference1" value="العمل بدون تواصل مع المستفيدين" checked="checked"><span class="skill" >العمل بدون تواصل مع المستفيدين</span><br>
         <input  type="checkbox" name="preference2" value="أفضل التعامل مع كبار السن"><span class="skill" >أفضل التعامل مع كبار السن</span><br>
         <input type="checkbox" name="preference3" value="أفضل التعامل مع الأطفال"><span class="skill" >أفضل التعامل مع الأطفال</span><br>
@@ -383,7 +224,7 @@ if(isset($_POST['add'])){
   
             <div  dir="rtl" id="Skilll">
 
-        <span  dir="rtl" >المهارات*</span><br><br>
+        <span  dir="rtl" >المهارات</span><br><br>
         <input  type="checkbox" id="s1" name="s1" value="استخدام الحاسب الآلي" ><span class="skill" >استخدام الحاسب الآلي</span><br>
         <input  type="checkbox" id="s2" name="s2" value="العمل الجماعي" ><span class="skill" >العمل الجماعي</span><br>
         <input type="checkbox" id="s3" name="s3" value="امكانية العمل تحت الضغط" ><span class="skill" >امكانية العمل تحت الضغط</span><br>
@@ -395,7 +236,7 @@ if(isset($_POST['add'])){
         </div>
 
         <input id="SubmitButtun" type="submit" name='add' class="fbutton" value="تسجيل">
-            <input type="button" value="إلغاء" class="Bbutton" onClick="history.go(-1);">
+            <input type="button" value="إلغاء" class="Bbutton">
       </form>
     </div>
   </div>
@@ -412,56 +253,51 @@ if(isset($_POST['add'])){
             var password = document.getElementById("txtPassword").value;
             var confirmPassword = document.getElementById("txtConfirmPassword").value;
               if (!password.match(upperCaseLetters)){
-                 document.getElementById("upper").innerHTML="<li class='fa fa-remove'></li>"+"-يجب أن تحتوي على حرف كبير   <br>";
+                 document.getElementById("upper").innerHTML="-يجب أن تحتوي على حرف كبير   <br>";
                   document.getElementById("txtPassword").style.borderColor="red";
                    document.getElementById("upper").style.color="red";
                    count++;
              }else{
-                 document.getElementById("upper").innerHTML="<li class='fa fa-check'></li>"+"-يجب أن تحتوي على حرف كبير   <br>";
                 document.getElementById("upper").style.color="green";
                 document.getElementById("txtPassword").style.borderColor="#9b59b6";
                  count--;
              }
                if (!password.match(lowerCaseLetters)){
-                 document.getElementById("lower").innerHTML="<li class='fa fa-remove'></li>"+"- يجب أن تحتوي على حرف صغير<br>";
+                 document.getElementById("lower").innerHTML="-يجب أن تحتوي على حرف صغير   <br>";
                   document.getElementById("txtPassword").style.borderColor="red";
                    document.getElementById("lower").style.color="red";
                    count++;
              }else{
-                document.getElementById("lower").innerHTML="<li class='fa fa-check'></li>"+"- يجب أن تحتوي على حرف صغير<br>";
                 document.getElementById("lower").style.color="green";
                 document.getElementById("txtPassword").style.borderColor="#9b59b6";
                  count--;
              }
                  if (!password.match(numbers)){
-                 document.getElementById("num").innerHTML="<li class='fa fa-remove'></li>"+"-يجب أن تحتوي على رقم   <br>";
+                 document.getElementById("num").innerHTML="-يجب أن تحتوي على رقم   <br>";
                   document.getElementById("txtPassword").style.borderColor="red";
                    document.getElementById("num").style.color="red";
                    count++;
              }else{
-                document.getElementById("num").innerHTML="<li class='fa fa-check'></li>"+"-يجب أن تحتوي على رقم   <br>";
                 document.getElementById("num").style.color="green";
                 document.getElementById("txtPassword").style.borderColor="#9b59b6";
                  count--;
              }
               if (!password.match(symbol)){
-                 document.getElementById("symbol").innerHTML="<li class='fa fa-remove'></li>"+"-يجب أن تحتوي على علامة خاصة   <br>";
+                 document.getElementById("symbol").innerHTML="-يجب أن تحتوي على علامة خاصة   <br>";
                   document.getElementById("txtPassword").style.borderColor="red";
                    document.getElementById("symbol").style.color="red";
                    count++;
              }else{
-                document.getElementById("symbol").innerHTML="<li class='fa fa-check'></li>"+"-يجب أن تحتوي على علامة خاصة   <br>";
                 document.getElementById("symbol").style.color="green";
                 document.getElementById("txtPassword").style.borderColor="#9b59b6";
                  count--;
              }
                if (password.length < 8){
-                 document.getElementById("8char").innerHTML="<li class='fa fa-remove'></li>"+"-يجب أن تتكون من 8 خانات   <br>";
+                 document.getElementById("8char").innerHTML="-يجب أن تتكون من 8 خانات   <br>";
                   document.getElementById("txtPassword").style.borderColor="red";
                    document.getElementById("8char").style.color="red";
                    count++;
              }else{
-                document.getElementById("8char").innerHTML="<li class='fa fa-check'></li>"+"-يجب أن تتكون من 8 خانات   <br>";
                 document.getElementById("8char").style.color="green";
                 document.getElementById("txtPassword").style.borderColor="#9b59b6";
                  count--;
@@ -506,7 +342,7 @@ if(isset($_POST['add'])){
         }
         //validate phone start with 0 and contain 10 digit
            function ValidatePhone() {
-      var regex="^05[0-9]{8}$";
+      var regex="^0[0-9]{9}$";
       var phone = document.getElementById("phone").value;
          if (!phone.match(regex)){
                  document.getElementById("er5").innerHTML="ادخل رقم الهاتف بالشكل الصحيح";

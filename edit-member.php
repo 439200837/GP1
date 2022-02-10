@@ -178,7 +178,7 @@ function mm(){
    }}
    
     function ValidatePhone() {
-var regex="^05[0-9]{8}$";
+var regex="^0[0-9]{9}$";
 var phone = document.getElementById("phone").value;
 if (!phone.match(regex)){
        document.getElementById("er5").innerHTML="ادخل رقم الهاتف بالشكل الصحيح";

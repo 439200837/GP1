@@ -1,6 +1,4 @@
-<?php
-session_start();
-require 'layout/header.php';
+<?php require 'layout/header.php';
 require 'config.php';  
 // change title name
 echo "<script> document.title='إعادة تعيين كلمة المرور' </script>";
@@ -13,18 +11,11 @@ if(isset($_POST['reset'])){
   	$res_e = mysqli_query($connection, $sql_e);
         $sql_v = "SELECT * FROM `volunteer` WHERE `email_address`='$email_address'";
   	$res_v = mysqli_query($connection, $sql_v);
-      if(mysqli_num_rows($res_e) > 0){
-      $_SESSION["type"]="member";
-    }elseif(mysqli_num_rows($res_v) > 0){
-      $_SESSION["type"]="volunteer";
-    }
 //check if the email it dose not exit in database    
   	 if(mysqli_num_rows($res_e) <= 0 && mysqli_num_rows($res_v) <= 0){            
 //echo to user that this email is not have an account
       $message= "<p style='text-align: right; color:red; margin-top:20px;'>". "البريد الإلكتروني غير مسجل"."</p>";
-    }
-   
-    else{      
+    }else{      
 //Redirect user to step 2
    header("location:forgetpass2.php?email=$email_address");
     }//end of case the email is found in database 

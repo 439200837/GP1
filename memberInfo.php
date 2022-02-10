@@ -12,7 +12,6 @@
    <button id="displayM" class="display" type="button">الأعضاء</button>
       <button id="displayV" class="display" type="button">المتطوعين</button>
       <button id="displayS" class="display" type="button">الرعاة</button>
-        <button id="displayA" class="display" type="button">المشرفين</button>
   </div>
 </div>
             
@@ -120,21 +119,6 @@ if (mysqli_num_rows($result) > 0) {
 
     });
 });
-
- $("#displayA").click(function() {                
-
-      $.ajax({    //create an ajax request to display.php
-        type: "GET",
-        url: "adminInfo.php",             
-        dataType: "html",   //expect html to be returned                
-        success: function(response){                    
-            $("#responsecontainer").html(response); 
-            //alert(response);
-        }
-
-    });
-});
-
 });
 
 

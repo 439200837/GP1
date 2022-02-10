@@ -1,5 +1,4 @@
-<?php
-require 'layout/header.php';
+<?php require 'layout/header.php';
 require 'config.php';  
 // change title name
 echo "<script> document.title='تسجيل دخول' </script>";
@@ -29,7 +28,6 @@ if (mysqli_num_rows($results) > 0) {
  $email=$row['email_address'];
  $SavedPass=$row['password'];
   $salt = $row['salt'];
-  $name=$row['first_name'];
   }
   //check if password entered is equal hashed password in the database
   // use hash function for Password encryption
@@ -40,10 +38,9 @@ if (mysqli_num_rows($results) > 0) {
        session_start();
        $_SESSION['type']="member";
        $_SESSION['id']=$id; 
-       $_SESSION['name']=$name;
        $_SESSION['email']=$email;
        $_SESSION['logged_in'] = true;
-       header("location:home.php?name=$name;");
+       header("location:home.php");
        
   }else{
        $message= "<p style='text-align: right; color:red; margin-top:20px;'>". "البريد الإلكتروني أو كلمة المرور غير صحيحة"."</p>";
@@ -79,7 +76,6 @@ if (mysqli_num_rows($results) > 0) {
  $email=$row['email_address'];
  $SavedPass=$row['password'];
  $salt = $row['salt'];
- $name=$row['first_name'];
   }
   //check if password entered is equal hashed password in the database
   // use hash function for Password encryption
@@ -91,10 +87,9 @@ if (mysqli_num_rows($results) > 0) {
        //save attribute is session array to use it later in authentication
        $_SESSION['type']="volunteer";
        $_SESSION['id']=$id; 
-     $_SESSION['name']=$name;
        $_SESSION['email']=$email;
        $_SESSION['logged_in'] = true;
-       header("location:home.php?name=$name;");
+       header("location:home.php");
        
   }else{
        $message= "<p style='text-align: right; color:red; margin-top:20px;'>". "البريد الإلكتروني أو كلمة المرور غير صحيحة"."</p>";
@@ -147,7 +142,6 @@ if (mysqli_num_rows($results) > 0) {
                     </div>
                     <div class="row mb-3 px-3"> <button type="submit" class="btn text-center" name="log" onfocus="Validation()" >تسجيل دخول</button> </div>
                     <div class="row mb-4 px-3 insertAccount"> <small class="font-weight-bold">ليس لديك حساب ؟ <a class="text-danger " href="index.php">إنشاء حساب</a></small> </div>
-                    <div class="row mb-4 px-3 insertAccount"> <small class="font-weight-bold"><a class="text-danger " href="adminLogIn.php"> تسجيل الدخول (مشرف)</a></small> </div>
                 </div>
         </div>
                <div class="col-lg-6">
