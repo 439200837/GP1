@@ -2,10 +2,10 @@
 session_start();
 //connect to the header.php page and to config.php page
 //connect to the AdminHeader.php page and to config.php page
-if($_SESSION['logged_in']===true && $_SESSION['type'] ==='member' && $_SESSION['id'] ==1){
+if($_SESSION['logged_in']===true && $_SESSION['type'] ==='admin'){
     require 'layout/AdminHeader.php'; 
  }
- elseif($_SESSION['logged_in']===true && $_SESSION['type'] ==='member' && $_SESSION['id'] !=1){
+ elseif($_SESSION['logged_in']===true && $_SESSION['type'] ==='member'){
     require 'layout/loggedHeader.php'; 
  }elseif($_SESSION['logged_in']===true && $_SESSION['type'] ==='volunteer'){
    require'layout/loggedHeader.php';

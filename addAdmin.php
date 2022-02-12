@@ -1,17 +1,11 @@
 <?php 
 session_start();
 //check if user is admin or restrict him/her 
-if($_SESSION['logged_in']===true && $_SESSION['type'] ==='member' && $_SESSION['id'] ==1){
-    require 'layout/AdminHeader.php'; 
- }
- else{
-     echo 'sorry ! you are not athorize to access this page'; 
-     header('location:log-in.php'); 
- }
+require 'layout/adminHeader.php';
 //connect to config.php page 
 require 'config.php';
 // change title name
-echo "<script> document.title='إضافة عضو' </script>";
+echo "<script> document.title='إضافة مشرف' </script>";
 //Include required PHPMailer files
 	require 'includes/PHPMailer.php';
 	require 'includes/SMTP.php';
@@ -30,8 +24,8 @@ if(isset($_POST['add'])){
     $phone_number = $_POST['phone'];
     $address = $_POST['address'];
  //bring the phone number and email information to check if it has been stored before
-  $sql_p = "SELECT * FROM member WHERE phone_number='$phone_number'";
-  $sql_e = "SELECT * FROM member WHERE email_address='$email_address'";
+  $sql_p = "SELECT * FROM admin WHERE phone_number='$phone_number'";
+  $sql_e = "SELECT * FROM admin WHERE email_address='$email_address'";
 
     $res_p = mysqli_query($connection, $sql_p);
   $res_e = mysqli_query($connection, $sql_e);
@@ -46,7 +40,7 @@ if(isset($_POST['add'])){
           $b=uniqid();
    $salt ='$6$rounds=5000'.$b;
   $password = crypt($_POST['pass'],$salt);
-       $query = "INSERT INTO `member` (`email_address`, `password`, `salt`, `first_name`, `last_name`, `gender`, `phone_number`, `address`) VALUES ('$email_address','$password','$salt','$first_name','$last_name','$gender','$phone_number','$address')";
+       $query = "INSERT INTO `admin` (`email_address`,`id`, `password`, `salt`, `first_name`, `last_name`, `gender`, `phone_number`, `address`) VALUES ('$email_address',223,'$password','$salt','$first_name','$last_name','$gender','$phone_number','$address')";
         $results = mysqli_query($connection, $query);
        
                  if ( false===$results ) {
@@ -58,14 +52,14 @@ if(isset($_POST['add'])){
            
                 Swal.fire({
                      icon: 'success',
-                     title: 'تم إضافة عضو بنجاح',
+                     title: 'تم إضافة المشرف بنجاح',
                      text: '',
                      showConfirmButton: true,
                      confirmButtonText:'إغلاق ',
                      closeOnConfirm: false
 
                      }).then((result) => {
-                         location.replace('add.php'); 
+                         location.replace('board.php'); 
                          })
 
                  </script>";
@@ -118,9 +112,9 @@ if(isset($_POST['add'])){
     <!-- Form that will appear to user -->
     <body class="reg" onkeyup="my();" >
         <div class="container5">
-    <div class="title" dir="rtl">إضافة الأعضاء</div>
+    <div class="title" dir="rtl">إضافة المشرفين</div>
     <div class="content">
-        <form name="form" action="add.php" method="post"  >
+        <form name="form" action="addAdmin.php" method="post"  >
         <div class="user-details">
             <div class="input-box">
             <span class="details" dir="rtl">الأسم الأول</span> 
@@ -162,171 +156,11 @@ if(isset($_POST['add'])){
           </div>
          
             
-          
             <div class="input-box">
-            <span class="details" dir="rtl"> الحي (مدينة الرياض) *</span>
-         <select name="address" id="address"  dir="rtl" required="required">
-  <option value="المغرزات">المغرزات</option>
-  
-  <option value="غرناطة">غرناطة</option>
-  
-  <option value="العقيق">العقيق</option>
-  
-  <option value="المروج">المروج</option> 
-  
-  <option value="الازدهار">الازدهار</option>
-  
-  <option value="الصحافة">الصحافة</option> 
-  
-  <option value="النخيل">النخيل</option>
-  
-  <option value="الملقا">الملقا</option> 
-  
-  <option value="الربيع">الربيع</option>
-  
-  <option value="النخيل الشرقي">النخيل الشرقي</option>
-  
-  <option value="النخيل الغربي">النخيل الغربي</option>
-  
-  <option value="الورود">الورود</option> 
-  
-  <option value="المرسلات">المرسلات</option>
-  
-  <option value="المروة">المروة</option> 
-  
-  <option value="الدار البيضاء">الدار البيضاء</option>
-  
-  <option value="العزيزية">العزيزية</option>
- <option value="شبرا">شبرا</option>
-  
-  <option value="الدريهمية">الدريهمية</option>  
-  
-  <option value="المنصورة">المنصورة</option>
-  
-  <option value="اليمامة">اليمامة</option> 
-  <option value="بدر">بدر</option>
-  
-  <option value="الفواز">الفواز</option> 
-  
-  <option value="نمار">الشفاء</option>
-  
-  <option value="المصانع">المصانع</option>
- <option value="الحاير">الحاير</option>
-  
-  <option value="الشميسي">الشميسي</option> 
-  
-  <option value="السويدي">السويدي</option>
-  
-  <option value="الشعلان">الشعلان</option>
-  
-  <option value="بن تركي">بن تركي</option>
-  
-  <option value="جامعة الملك سعود">جامعة الملك سعود</option>
-  
-  <option value="عرقة">عرقة</option>
-  
-  <option value="الدرعية">الدرعية</option> 
-  <option value="شبرا">شبرا</option>
-  
-  <option value="ظهرة البديعة">ظهرة البديعة</option> 
-  
-  <option value="العريجاء">العريجاء </option>
-  
-  <option value="البديعة">البديعة</option>
- <option value="القدس">القدس</option>
-  
-  <option value="الحمراء">الحمراء</option> 
-  
-  <option value="الريان">الريان</option>
-  
-  <option value="الروضة">الروضة</option>
-  
-  <option value="الشهداء">الشهداء</option>
-  
-  <option value="الفلاح">الفلاح</option>
- <option value="النسيم">النسيم</option>
-  
-  <option value="قرطبة">قرطبة</option> 
-  <option value="أشبيلية">أشبيلية</option>
-  
-  <option value="الرواد">الرواد</option> 
-  
-  <option value="الربوه">الربوه</option>
-  
-  <option value="الجزيرة">الجزيرة</option>
- <option value="اليرموك">اليرموك</option>
-  
-  <option value="الخليج">الخليج</option> 
-  
-  <option value="النهضة">النهضة</option>
-  
-  <option value="السلي">السلي</option>
-  
-  <option value="الملز">الملز</option>
-  
-  <option value="الديره">الديره</option>          
-  
-   <option value="المرقب">المرقب</option>
-  
-  <option value="البطحاء">البطحاء</option> 
-  <option value="الفاخرية">الفاخرية</option>
-  
-  <option value="المربع">المربع</option> 
-  
-  <option value="الصالحية">الصالحية</option>
-  
-  <option value="المونسية">المونسية</option>
- <option value="طويق">طويق</option>
-  
-  <option value="الرمال">الرمال</option> 
-  
-  <option value="العارض">العارض</option>
-  
-  <option value="اليرموك">اليرموك</option>
-  
-  <option value="السلام">السلام</option>
-  
-  <option value="الياسمين">الياسمين</option>
-  
- 
-  
-   <option value="الرائد">الرائد</option>
-  
-  <option value="العليا">العليا</option> 
-  <option value="الفلاح">الفلاح</option>
-  
-  <option value="التعاون">التعاون</option> 
-  
-  <option value="الخزامي">الخزامي</option>
-  
-  <option value="منفوحة">منفوحة</option>
- <option value="النزهة">النزهة</option>
-  
-  <option value="الواحة">الواحة</option> 
-  
-  <option value="النظيم">النظيم</option>
-  
-  <option value="الوادي">الوادي</option>
-  
-  <option value="الملك فهد">الملك فهد</option>
-  
-  <option value="الملك فيصل">الملك فيصل</option>
-
-<option value="الخالدية">الخالدية</option>
-  
-  <option value="السليمانية">السليمانية</option> 
-  <option value="حطين">حطين</option>
-  
-  <option value="أم سليم">أم سليم</option> 
-  
-  <option value="المصيف">المصيف</option>
-  
-  <option value="الطريف">الطريف</option>
- <option value="صلاح الدين">صلاح الدين</option>
-  
-  
-         </select>
-          </div>
+            <span class="details" dir="rtl">العنوان</span>
+            <input type="text" name="address" onkeyup="ValidateName()" id="address" placeholder="المدينة، الحي، الشارع"  dir="rtl" required="required">
+           <p id="er8" style="color: red;"></p>
+            </div>
             
             
                <div class="gender-details" dir="rtl">
@@ -536,3 +370,4 @@ if(isset($_POST['add'])){
 ?>
    </body>
 </html>
+
