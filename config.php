@@ -4,7 +4,7 @@
       define('Server', "localhost:8889");
         define('user', "root");
         define('pass', "root");
-       define('Database', "taj");
+       define('Database', "taj3");
         $connection = mysqli_connect(Server, user, pass, Database);
         
         //handle the error

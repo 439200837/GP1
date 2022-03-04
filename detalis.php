@@ -88,6 +88,19 @@ echo "<script> document.title='تفاصيل البرنامج' </script>";
         <h4 class="datep" style="color: #009999;"><span> يبدأ من </span><?php 
         //retrieve the date of the program
         echo $row['start_date']?><span> إلى </span><?php echo $row['end_date']?> </h4>
+          
+          <br>
+          
+          
+        <?php  if ($tt['status'] == 'تمت الموافقة') { 
+   echo '<span style="color: #009999 ;" >إجراءات المتطوع للعمل بالبرنامج: </span> <br>' ;
+   
+        echo '<span style="color: #009999 ;">' .$row['procedures']. '</span>' ;
+                     
+        } 
+        
+        ?>
+          
       </div>
           <div class="image">
        
@@ -112,31 +125,39 @@ echo "<script> document.title='تفاصيل البرنامج' </script>";
                    //retrieve the description of the program
                    echo $row['description']?> </p>
                    <!-- a button to enroll in a program -->
-                   <?php
-                   if($check == '0'){
+                                 <?php 
+      //check if the logged in user is a member to display the edit program button 
+     if($_SESSION['logged_in']===true && $_SESSION['type']==='member' ){
+       echo '<a href="userFilter.php?id='.$id.'"'.'<button class="buttonP" type="submit" name="choose">اختيار المتطوعين</button></a>';  
+     
+     }
+           
+                   else if($check == '0'){
          ?>
               <form action="programs.php" method="POST" style="margin-top: 14px;">
                 <input type="hidden" name="volenteer_id" value="<?= $_SESSION['id']; ?>">
                 <input type="hidden" name="program_id" value="<?= $row['id'] ?>">
                 <input type="hidden" name="email_address" value="<?= $_SESSION['email_address'] ?>">
-                <button class="buttonP" type="submit" name="insert">انضم إلينا</button>
+            <button class="buttonP" type="submit" name="insert">انضم إلينا</button>
               </form>
               <?php }elseif($check == '2'){?>
                 <button class="buttonP">قيد انتظار القبول </button>
               <?php }else{?>
                 <button class="buttonP">تمت الموافقة</button>
               <?php }?>
+         
                     <!-- <button id="enroll"  name="enroll" type="button" class="buttonP">انضم إلينا </button> -->
     </div>
    
   
    
-   
-   
+     
+     
       <input type="hidden" name="id" value="<?=$row['id']?>">
 
          <?php  }
     }
+    //echo'<script>alert('.$id.');</script>'
       ?>
 
 <element dir="rtl">

@@ -1558,6 +1558,15 @@ background-color: #E8E8E8;
 .detailssdelete{
   background-color: red;
 }
-.detailss:hover, .detailssdelete:hover{
+.detailss:hover{
  background-color: #583e69;   
 }
+.detailssdelete:hover{
+background-color:#fff !important;
+color: red;
+border: solid red;
+}
+.detailssdelete a{
+text-decoration: none;
+}
+

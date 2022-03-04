@@ -21,6 +21,7 @@ if(isset($_POST['add'])){
     $prodes = $_POST['prodes'];
   $start_date = $_POST['prostart'];
   $end_date = $_POST['proend'];
+  $procedures= $_POST['propro'];
  // $protype=$_POST['protype'];
  
    $checkbox1=$_POST['protype'];  
@@ -43,7 +44,7 @@ foreach($checkbox1 as $chk1)
         
     }else{
        //insert in program table
-       $query = "INSERT INTO program (name, start_date, end_date, type, description, picture ) VALUES ('$proname','$start_date','$end_date','$chk','$prodes','$image')";
+       $query = "INSERT INTO program (name, start_date, end_date, type, description, picture, procedures ) VALUES ('$proname','$start_date','$end_date','$chk','$prodes','$image', '$procedures')";
         $results = mysqli_query($connection, $query);
        
                  if ( false===$results ) {
@@ -91,6 +92,11 @@ foreach($checkbox1 as $chk1)
            <p id="er10" style="color: red;"></p>
            </div>
             
+             <div class="input-box">
+            <span class="details" dir="rtl">إجراءات المتطوع للعمل بالبرنامج</span> 
+              <input type="text"    name="propro" id="propro" onkeyup="Validatedes() () " placeholder="الإجراءات اللازمة" dir="rtl" required="required">
+           <p id="er10" style="color: red;"></p>
+           </div>
             
            <div class="input-box">
             <span class="details" dir="rtl">تاريخ بداية البرنامج</span>
@@ -183,6 +189,22 @@ foreach($checkbox1 as $chk1)
                 document.getElementById("prodes").style.borderColor="#9b59b6";
               
              }}
+         
+              function Validatedes()   {  
+            var regex="^[\u0621-\u064A\0400-9!@#\$%\^\&*\)\(+=.ّ,_ًٌٍَُِ]+$";
+      var reg="[\u0600-\u06FF]";
+      var pname = document.getElementById("proname").value;
+      var pdes = document.getElementById("propro").value;
+      if (!pdes.match(regex) &&pdes!==""){
+                 document.getElementById("er10").innerHTML="فضلا ، ادخل وصف صحيح";
+                  document.getElementById("propro").style.borderColor="red";
+                  
+             }else{
+                document.getElementById("er10").innerHTML="";
+                document.getElementById("propro").style.borderColor="#9b59b6";
+              
+             }}
+         
          
       function ValidateCheckBox() {
        var checkboxes = document.querySelectorAll('input[type="checkbox"]');

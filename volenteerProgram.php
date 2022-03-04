@@ -5,9 +5,10 @@
  }
  elseif($_SESSION['logged_in']===true && $_SESSION['type'] ==='member' && $_SESSION['id'] !=1){
     require 'layout/loggedHeader.php'; 
+ }elseif($_SESSION['logged_in']===true && $_SESSION['type'] ==='volunteer'){
+   require'layout/loggedHeader.php';
  }else{
-     echo 'sorry ! you are not athorize to accecc this page'; 
-     header('location:log-in.php');  
+  require'layout/header.php';   
  }
 //calling database conennction
 require 'config.php';
@@ -26,9 +27,9 @@ if(isset($_POST['insert']))
 {	 
 	 $id1 = $_POST['joinid'];
 	 $status = $_POST['status'];
-	 $member_id = $_SESSION['id'];
+	 $member_id = 1;
 	 $email_address = $_POST['email_address'];
-//storing the info of the responsible memeber 
+
 	 $sql_update = "UPDATE `enroll` SET `status`='$status', `member_id`='$member_id' WHERE `id`='$id1'";
      $results = mysqli_query($connection, $sql_update);
 if ( false===$results ) {
@@ -52,7 +53,7 @@ Swal.fire({
          })
 
  </script>";
-//send an auto email about rejecting or accepting the enrollment
+//send an auto email including the email and password if the member is added
 //Create instance of PHPMailer
 $mail = new PHPMailer();
 //Set mailer to use smtp
@@ -131,9 +132,9 @@ $mail->smtpClose();
             <tr class="row1">
                   <td class="column1">#</td>
                   <?php
-   //volunteer infomation will appear first
+   //member infomation will appear first
             echo
-      '<td class="column1">اسم المتطوع </td>'
+      '<td class="column1">اسم العضو </td>'
            .'<td class="column2">البريد الإلكتروني</td>'.'<td class="column3">رقم الهاتف</td>'.
 		'<td class="column4">الجنس</td>'.
                 '<td class="column4">البرنامج المطلوب التسجيل فيه</td>'.
@@ -141,7 +142,7 @@ $mail->smtpClose();
                '<td class="column4">رفض</td>'.' </tr>  
             </thead>';
             
-            //including all volunteers in database
+            //including all members in database
                     $sql="SELECT * FROM `enroll`";
                     $sql2 = "SELECT volunteer.first_name, volunteer.last_name, volunteer.email_address , volunteer.phone_number, volunteer.gender, enroll.program_id, enroll.id, program.name FROM volunteer, enroll, program WHERE volunteer.id = enroll.volenteer_id AND enroll.status = 'قيد الانتظار' AND enroll.program_id = program.id ;";
                     $sql3="SELECT `volunteer.first_name` AS `state`, `enroll.program_id` AS `fake` FROM `volunteer`, `enroll` WHERE `volunteer.id` = `enroll.volenteer_id`";
@@ -152,7 +153,7 @@ if (mysqli_num_rows($result) > 0) {
    echo    '<tbody class="table-body">
 	<tr class="row2">
             <td class="cell100 column1" id="inc"></td>
-		<td class="cell100 column1">'.$row['first_name'].' '.$row['last_name'].'</td>
+		<td class="cell100 column1"><a href="volenteerDetails.php?id='.$row['email_address'].'">'.$row['first_name'].' '.$row['last_name'].'</a></td>
 		<td class="cell100 column2">'.$row['email_address'].'</td>
 		<td class="cell100 column3">'.$row['phone_number'].'</td>
 		<td class="cell100 column3">'.$row['gender'].'</td>
@@ -204,4 +205,3 @@ if (mysqli_num_rows($result) > 0) {
     <script type="text/javascript" src="jquery-1.3.2.js"> </script>
  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </html>
-

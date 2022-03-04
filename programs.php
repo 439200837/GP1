@@ -23,6 +23,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+
+
 //if the enrollment button is pressed
 if(isset($_POST['insert']))
 {	 
@@ -32,8 +34,8 @@ if(isset($_POST['insert']))
 	 $member_id = 1;
 	 $email_address =$_SESSION['email'];
 
-	 $sql = "INSERT INTO `enroll` (`volenteer_id`,`program_id`,`status`,`member_id`)
-	 VALUES ('$volenteer_id','$program_id','$status','$member_id')";
+	 $sql = "INSERT INTO `enroll` (`volenteer_id`,`program_id`,`status`,`member_id`,`Vemail_address`,`rate`)
+	 VALUES ('$volenteer_id','$program_id','$status','$member_id','$email_address','لم يتم التقييم')";
      $results = mysqli_query($connection, $sql);
 if ( false===$results ) {
     echo "<p style='text-align: right; margin-top:120px;'>". "نعتذر ، حدث خطأ"."</p>";
@@ -95,7 +97,46 @@ $mail->smtpClose();
         }
 
 }
+//START CODE CHANGE STSTUS 
+$currentdate = date("Y-m-d");
+$today_time = strtotime($currentdate);
+$expire_time = strtotime($enddate);
+$sqlU="UPDATE `enroll` SET status='انتهى' WHERE program_id IN (SELECT id FROM program WHERE end_date < '$currentdate') AND status='تمت الموافقة'";
+$resultU=mysqli_query($connection,$sqlU);
+//END CHANGE STATUS 
+
+if(isset($_POST['deleteenroll']))
+{	 
+	 $enroll_id = $_POST['enrollid'];
+   $sql="DELETE FROM `enroll` WHERE `enroll`.`id` = '$enroll_id'";
+
+     $resultsdelete = mysqli_query($connection, $sql);
+if ( false===$resultsdelete ) {
+    echo "<p style='text-align: right; margin-top:120px;'>". "نعتذر ، حدث خطأ"."</p>";
+    echo "Error: " . $sql . "" . mysqli_error($connection);
+                    }
+ else {
+       //echo success adding member
+          echo "<script>
+
+Swal.fire({
+     icon: 'success',
+     title: 'تم إلغاء الطلب بنجاح',
+     text: '',
+     showConfirmButton: true,
+     confirmButtonText:'إغلاق ',
+     closeOnConfirm: false
+
+     }).then((result) => {
+         location.replace('programs.php'); 
+         })
+
+ </script>";
+        }
+
+}
 ?>
+
 <element dir="rtl">
 <div class="containerP">
 
@@ -156,6 +197,8 @@ $check = 0;
               $check= 2;
             } elseif ($tt['status'] == 'تمت الموافقة') {
               $check= 3;
+          
+              
             }else{
               $check= 0;
             }
@@ -186,6 +229,8 @@ $check = 0;
       <form action="programs.php" method="POST" style="margin-top: 14px;">
         <input type="hidden" name="volenteer_id" value="<?= $_SESSION['id']; ?>">
         <input type="hidden" name="program_id" value="<?= $row['id'] ?>">
+        <input type="hidden" name="enddate" value="<?= $row['end_date'] ?>">
+         <input type="hidden" name="id" value="<?=$id?>">
         <button class="detailss" type="submit" name="insert">انضم إلينا</button>
        </form>
       <?php }
@@ -196,6 +241,8 @@ $check = 0;
          //accepted
          else{?>
         <button class="detailss">تمت الموافقة</button>
+        <a class="detailssdelete" href="javascript:void(0)" id="delete_enroll" data-id="<?=$enrollid;?>" class="trigger-btn" data-toggle="modal">
+إلغاء</a>
       <?php } }?>
 
       <button class="detailss" onclick="go('detalis.php?id=<?=$row['id']?>')">التفاصيل</button>
@@ -205,7 +252,60 @@ $check = 0;
 </div>
 
 </div>
+<script>
+//delete users using jQuery (POST)
+$(document).ready(function(){
+		
+		//when click on delete button
+		$(document).on('click', '#delete_enroll', function(e){
+		
+			var productId = $(this).data('id');
+			SwalDelete(productId);
+			e.preventDefault();
+                     
+		});
+		
+	
+	//an alert will appear to confirm deleting
+	function SwalDelete(enrollid){
+	Swal.fire({
+  title: 'هل أنت متأكد ؟',
+  text: "لن تستطيع استرجاع البيانات بعد عملية الحذف",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#d33',
+  cancelButtonColor: '#3085d6',
+  confirmButtonText: 'حذف',
+  cancelButtonText:'إلغاء'
+}).then((result) => {
+  if (result.isConfirmed) {
+      //when click on confirm
+     $.ajax({    //create an ajax request 
+        type: "POST",
+        url: "deleteEnroll.php",
+        data: {enrollid:enrollid},
+        dataType: "html",   //expect html to be returned                
+        success: function(response){                    
+            Swal.fire(
+      response,
+      'تم الحذف بنجاح',//alert message with success delete 
+      'success'    
+    ).then((result) => {
+        location.reload(true); // reload page 
+    })
+        },
+  error: function(XMLHttpRequest, textStatus, errorThrown) {
+     alert(textStatus); //alert error message if there
+  }
 
+    });//end ajax
+
+            }
+})
+		
+	}
+});
+</script>
 <?php endwhile;?>
 
 
@@ -234,4 +334,3 @@ function go(web){
 
 
 </script>
-

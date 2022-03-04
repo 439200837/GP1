@@ -1,5 +1,7 @@
 <?php
  session_start();
+ $id=$_SESSION['program_id'];
+ //echo'<script>alert('.$id.');</script>';
  if($_SESSION['logged_in']===true && $_SESSION['type'] ==='member' && $_SESSION['id'] ==1){
     require 'layout/AdminHeader.php'; 
  }
@@ -20,7 +22,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-if(isset($_POST['insert']))
+if(isset($_POST['send']))
 {   
    $id1 = $_POST['joinid'];
    $status = $_POST['status'];
@@ -132,7 +134,7 @@ $mail->smtpClose();
    //member infomation will appear first
             echo
       '<td class="column1">اسم المتطوع </td>'
-           .'<td class="column2">البريد الإلكتروني</td>'.'<td class="column3">رقم الهاتف</td>'.
+           .'<td class="column2">البريد الإلكتروني</td>'.'<td class="column3">التخصص</td>'.
             '<td class="column4">الجنس</td>'.
                 '<td class="column4">عدد البرامج المشترك بها</td>'.
                 '<td class="column4">التقييم</td>'.
@@ -140,41 +142,30 @@ $mail->smtpClose();
                 '<td class="column4">إضافة</td>'.'
                  </tr>  
             </thead>';
-            
-            //including all members in database
-                    $sql="SELECT * FROM volunteer";
-                    $sql2="SELECT * FROM enroll";
-                    $sql3 = "SELECT volunteer.first_name, volunteer.last_name, volunteer.email_address , volunteer.phone_number, volunteer.gender, enroll.program_id, enroll.id, program.name FROM volunteer, enroll, program WHERE volunteer.id = enroll.volenteer_id AND enroll.status = 'قيد الانتظار' AND enroll.program_id = program.id ;";
-                    $sql3="SELECT volunteer.first_name AS state, enroll.program_id AS fake FROM volunteer, enroll WHERE volunteer.id = enroll.volenteer_id";
-          $result = mysqli_query( $connection, $sql);
-          $result2 = mysqli_query( $connection, $sql2);
-          $result3 = mysqli_query( $connection, $sql);
-          $result4 = mysqli_query( $connection, $sql2);
-if (mysqli_num_rows($result) > 0) {
-  // output data of each row
-  while($row = mysqli_fetch_assoc($result)) {
-      $countenrolls = 0;
-      foreach($result2 as $row2){
-        if($row['id'] == $row2['volenteer_id']){
-            $countenrolls++;
-        }
-    };
-    if($countenrolls > 0){
+
+    $data= $_GET['finalArray'];
+    $data1= json_decode($data, true);
+    //var_dump($data);
+    //print_r($data1[0][5]);
+    $arrLength = count($data1);
+    for($i=0;$i<$arrLength;$i++){
+    if($date1[$i][4]!==0){
    echo    '<tbody class="table-body">
   <tr class="row2">
             <td class="cell100 column1" id="inc"></td>
-    <td class="cell100 column1">'.$row['first_name'].' '.$row['last_name'].'</td>
-    <td class="cell100 column2">'.$row['email_address'].'</td>
-    <td class="cell100 column3">'.$row['phone_number'].'</td>
-    <td class="cell100 column3">'.$row['gender'].'</td>
-    <td class="cell100 column3">'.$countenrolls.'</td>
-    <td class="cell100 column3">4 / 5</td>
+    <td class="cell100 column1">'.$data1[$i][5].' '.$data1[$i][6].'</td>
+    <td class="cell100 column2">'.$data1[$i][0].'</td>
+    <td class="cell100 column3">'.$data1[$i][2].'</td>
+    <td class="cell100 column3">'.$data1[$i][7].'</td>
+    <td class="cell100 column3">'.$data1[$i][4].'</td>
+    <td class="cell100 column3">'.$data1[$i][3].'/5</td>
     <td class="column5"><a href="programsVolunteer.php?id='.$row['id'].'">عرض البرامج</a></td>
-    <td class="column5"><a href="programsVolunteerAdd.php?id='.$row['id'].'">إضافة</a></td>
+   <form action="volenteerShowPrograms.php" method="POST" style="margin-top: 14px;">
+    <button style="display: none;" name:"send"><td class="column5"><a href=#>إضافة</a></td></button>
+    </form>
     
-        </tr>';
-  }
-                  }};
+    </tr>';}
+    }
                   
                   
                   
@@ -204,45 +195,27 @@ if (mysqli_num_rows($result) > 0) {
    //member infomation will appear first
             echo
       '<td class="column1">اسم المتطوع </td>'
-           .'<td class="column2">البريد الإلكتروني</td>'.'<td class="column3">رقم الهاتف</td>'.
+           .'<td class="column2">البريد الإلكتروني</td>'.'<td class="column3">التخصص</td>'.
             '<td class="column4">الجنس</td>'.
                 '<td class="column4">إضافة</td>'.'
                  </tr>  
             </thead>';
-            
-            //including all members in database
-                    $sql="SELECT * FROM volunteer";
-
-$sql2="SELECT * FROM enroll";
-                    $sql3 = "SELECT volunteer.first_name, volunteer.last_name, volunteer.email_address , volunteer.phone_number, volunteer.gender, enroll.program_id, enroll.id, program.name FROM volunteer, enroll, program WHERE volunteer.id = enroll.volenteer_id AND enroll.status = 'قيد الانتظار' AND enroll.program_id = program.id ;";
-                    $sql3="SELECT volunteer.first_name AS state, enroll.program_id AS fake FROM volunteer, enroll WHERE volunteer.id = enroll.volenteer_id";
-          $result = mysqli_query( $connection, $sql);
-          $result2 = mysqli_query( $connection, $sql2);
-          $result3 = mysqli_query( $connection, $sql);
-          $result4 = mysqli_query( $connection, $sql2);
-if (mysqli_num_rows($result) > 0) {
-  // output data of each row
-  while($row = mysqli_fetch_assoc($result)) {
-      $countenrolls = 0;
-      foreach($result2 as $row2){
-        if($row['id'] == $row2['volenteer_id']){
-            $countenrolls++;
-        }
-    };
-    if($countenrolls == 0){
+ for($i=0;$i<$arrLength;$i++){
+    if($date1[$i][4]===0){
    echo    '<tbody class="table-body">
   <tr class="row2">
             <td class="cell100 column1" id="inc"></td>
-    <td class="cell100 column1">'.$row['first_name'].' '.$row['last_name'].'</td>
-    <td class="cell100 column2">'.$row['email_address'].'</td>
-    <td class="cell100 column3">'.$row['phone_number'].'</td>
-    <td class="cell100 column3">'.$row['gender'].'</td>
-    <td class="column5"><a href="programsVolunteerAdd.php?id='.$row['id'].'">إضافة</a></td>
-    
+    <td class="cell100 column1">'.$data1[$i][5].' '.$data1[$i][6].'</td>
+    <td class="cell100 column2">'.$data1[$i][0].'</td>
+    <td class="cell100 column3">'.$data1[$i][2].'</td>
+    <td class="cell100 column3">'.$data1[$i][7].'</td>
+    <form action="volenteerShowPrograms.php" method="POST" style="margin-top: 14px;">
+    <button style="display: none;" name:"send"><td class="column5"><a href="programsVolunteerAdd.php?id='.$row['id'].'">إضافة</a></td></button>
+    </form>
         </tr>';
-  }}
-                  }
-                  
+   }
+    }
+   
                   
                   
                   
