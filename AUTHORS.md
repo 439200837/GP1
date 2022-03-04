@@ -2,7 +2,7 @@ Nora Aljenoobi
 
 Ghaida Alkhudhairi 
 
-Leena Alnowaiser. 
+Leena Alnowaiser
 
 Mashael Alqarni
 
