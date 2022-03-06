@@ -185,7 +185,7 @@ $check = 0;
     <br>
       <?php if($_SESSION['logged_in']&& $_SESSION['type']==="member"){?>
       <button class="detailss" onclick="go('EditProgram.php?id=<?=$row['id']?>')">تعديل</button>
-      <button class="detailss" onclick="go('memberrate.php?id=<?=$row['id']?> &date=<?=$row['end_date']?>')">تقييم المتطوعين</button>
+     
       <?php }
        else{
 
