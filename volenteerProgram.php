@@ -49,7 +49,7 @@ Swal.fire({
      closeOnConfirm: false
 
      }).then((result) => {
-         location.replace('volenteerProgram.php'); 
+         location.replace('volenteerShowPrograms.php'); 
          })
 
  </script>";
@@ -101,8 +101,8 @@ $mail->smtpClose();
 }
 ?>
 <element dir="rtl">
-  
-        
+
+ 
     <!-- <div id="responsecontainer">
         <div class="above-table">
             

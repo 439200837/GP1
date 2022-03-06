@@ -160,8 +160,9 @@ Swal.fire({
 
 
 <?php
-$sql="SELECT * FROM `program`";
-$result=mysqli_query($connection,$sql);
+$currentdate1 = date("Y-m-d");
+$sql="SELECT * FROM `program` WHERE end_date > '$currentdate1'";
+//$result=mysqli_query($connection,$sql);
 $sql2="SELECT * FROM `enroll` WHERE `volenteer_id` = '" . $_SESSION["id"] . "'";
 
 $result=mysqli_query($connection,$sql);

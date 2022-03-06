@@ -1014,7 +1014,7 @@ textarea:focus {
     background-color: #009999;
     width: 150px;
     color: #fff;
-    border-radius: 6px
+    border-radius: 6px;
 }
 .btn:hover{
     color: #fff;
@@ -1569,4 +1569,29 @@ border: solid red;
 .detailssdelete a{
 text-decoration: none;
 }
+.add_decline{
+ background: none!important;
+ border: none;
+}
+.add_decline:hover{
+ color: red;
+}
 
+.BackButton{
+ background-color: #009999;
+ color: #fff; 
+  padding: 10px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 18px;
+  border-radius:10px;
+  height: 45px;
+  text-align: center;
+   margin-right:20px;
+}
+.BackButton:hover{
+ background-color: #fff;
+ color:#009999; 
+ border: 1.2px solid #009999;
+}

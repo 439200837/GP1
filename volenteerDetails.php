@@ -1,5 +1,5 @@
 <?php
-//  session_start();
+session_start();
 require 'config.php';
  if($_SESSION['logged_in']===true && $_SESSION['type'] ==='member' && $_SESSION['id'] ==1){
     require 'layout/AdminHeader.php'; 
@@ -31,6 +31,14 @@ echo "<script> document.title='معلومات المتطوع' </script>";
    </head>
    
    <body class="reg" onkeyup="my()">
+ <nav aria-label="breadcrumb" style="margin: 1%; margin-top:100px;">
+  <ol class="breadcrumb">
+      <li class="breadcrumb-item"><strong><a href="programs.php">برامجنا</a> </strong></li>
+      <li class="breadcrumb-item"><strong><a href="detalis.php?id=<?php echo $_SESSION['program_id'] ;?>">التفاصيل</a> </strong></li>
+      <li class="breadcrumb-item"><strong><a href="userFilter.php?id=<?php echo $_SESSION['program_id'] ;?>">اختيار المتطوعين</a> </strong></li>
+      <li class="breadcrumb-item active" aria-current="page"> <strong>معلومات المتطوع </strong></li>
+  </ol>
+</nav> 
 <?php
  $id=$_GET['id'];
  

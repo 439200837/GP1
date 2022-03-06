@@ -35,7 +35,7 @@ $email=$_SESSION['email'];
 			</div>
 			<div class="collapse navbar-collapse navbar-1">
                             <ul class="site-navigation nav" id="myLinks">
-                                    <a href="volenteerProgram.php"><i class="fa fa-bell"></i></a>
+                                    
 					
 					</li>
                                 <li id="top">

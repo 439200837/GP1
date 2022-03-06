@@ -45,40 +45,15 @@ echo "<script> document.title='تفاصيل البرنامج' </script>";
  
     <div class="cardA">
         <?php  
-   $email=$_SESSION['email_address'];
    if (isset($_GET['id'])) {
 //retrieve all the program's information of this id
   $sql="SELECT * FROM `program` where id='$id'";
-  $sql2 = "SELECT program.*, enroll.program_id, enroll.id, enroll.volenteer_id, enroll.status FROM program, enroll WHERE enroll.program_id = program.id";
           $result = mysqli_query( $connection, $sql);
-          $result2 = mysqli_query( $connection, $sql2);
   // output data of each row
-  while($row = mysqli_fetch_assoc($result)) {
-    $check = 0;
-    foreach($result2 as $tt){
-      if($row['id'] == $tt['program_id']){
-        if ($tt['status'] == 'قيد الانتظار') {
-          $check= 2;
-        } elseif ($tt['status'] == 'تمت الموافقة') {
-          $check= 3;
-         
-        }else{
-          $check= 0;
-        }
-      }
-    }
-    
-    ?>
+  while($row = mysqli_fetch_assoc($result)) {?>
       
     <div class="fakeimg">
-         <?php 
-      //check if the logged in user is a member to display the edit program button 
      
-     if($_SESSION['logged_in']===true && $_SESSION['type']==='member' ){
-          
-     echo '<a href="EditProgram.php?id='.$id.'"'.'<button id="editP"  name="editP" type="button" class="buttonP">تعديل</button></a>';
-     echo '<style> .fakeimg{justify-content:space-around !important;} </style>';
-     }?>
       
      
   
@@ -91,19 +66,6 @@ echo "<script> document.title='تفاصيل البرنامج' </script>";
         <h4 class="datep" style="color: #009999;"><span> يبدأ من </span><?php 
         //retrieve the date of the program
         echo $row['start_date']?><span> إلى </span><?php echo $row['end_date']?> </h4>
-          
-          <br>
-          
-          
-        <?php  if ($check===3) { 
-   echo '<span style="color: #009999 ;" >إجراءات المتطوع للعمل بالبرنامج: </span> <br>' ;
-   
-        echo '<span style="color: #009999 ;">' .$row['procedures']. '</span>' ;
-                     
-        } 
-        
-        ?>
-          
       </div>
           <div class="image">
        
@@ -112,10 +74,6 @@ echo "<script> document.title='تفاصيل البرنامج' </script>";
       echo '<img src="data:image/jpeg;base64,'.base64_encode($row['picture']).'"alt:"program img" style:"width:100%;"/>';?>
       </div> 
     </div>
-        <br>
-        <br>
-        <br>
-        <br>
         <br>
          <hr class="lineP"></hr>
         
@@ -127,42 +85,18 @@ echo "<script> document.title='تفاصيل البرنامج' </script>";
                    <p class="descriptionp" style="color:#660066;"><?php 
                    //retrieve the description of the program
                    echo $row['description']?> </p>
-                   <!-- a button to enroll in a program -->
-                                 <?php 
-      //check if the logged in user is a member to display the edit program button 
-     if($_SESSION['logged_in']===true && $_SESSION['type']==='member' ){
-       echo '<a href="userFilter.php?id='.$id.'"'.'<button class="buttonP" type="submit" name="choose">اختيار المتطوعين</button></a>';  
-     
-     }
-           
                    
-         ?>
-              
-              <?php if($check == '2' && $_SESSION['logged_in']===true){?>
-                <button class="buttonP">قيد انتظار القبول </button>
-              <?php }elseif($_SESSION['logged_in']===true){?>
-                <button class="buttonP">تمت الموافقة</button>
-              <?php } else {?>
-          <form action="programs.php" method="POST" style="margin-top: 14px;">
-                <input type="hidden" name="volenteer_id" value="<?= $_SESSION['id']; ?>">
-                <input type="hidden" name="program_id" value="<?= $row['id'] ?>">
-                <input type="hidden" name="email_address" value="<?= $_SESSION['email_address'] ?>">
-            <button class="buttonP" type="submit" name="insert">انضم إلينا</button>
-              </form>
-    <?php  }?>
-         
-                    <!-- <button id="enroll"  name="enroll" type="button" class="buttonP">انضم إلينا </button> -->
+                    
     </div>
    
   
    
-     
-     
+   
+   
       <input type="hidden" name="id" value="<?=$row['id']?>">
 
          <?php  }
     }
-    //echo'<script>alert('.$id.');</script>'
       ?>
 
 <element dir="rtl">
@@ -180,3 +114,4 @@ echo "<script> document.title='تفاصيل البرنامج' </script>";
 ?>
     </body>
 </html>
+

@@ -38,12 +38,10 @@ $email=$_SESSION['email'];
 				<ul class="site-navigation nav">
 					<li>
 					<?php
-					if($_SESSION['logged_in']===true && $_SESSION['type'] ==='member'){
+					if($_SESSION['logged_in']===true && $_SESSION['type'] ==='volunteer'){
 					?>
-						<a href="volenteerProgram.php"><i class="fa fa-bell"></i></a>
-					<?php }else{ ?>
 						<a href="volenteerShowProgram.php"><i class="fa fa-bell"></i></a>
-						<?php } ?>
+					<?php } ?>
 					</li>
 					<li>
 						<a href="programs.php">برامجنا</a>

@@ -23,6 +23,9 @@ $result3=mysqli_query($connection,$sql3);
 // set array
 $EArray = array();
 // look through query
+if (mysqli_num_rows($result3) <= 0){
+    echo "<script>location.replace('volenteerShowPrograms.php?id=$id');</script>";   
+}
 while($row=mysqli_fetch_assoc($result3)){
   // add each row returned into an array
   $EArray[] = $row;
@@ -82,14 +85,17 @@ var arr=JSON.stringify(finalArray);
 var s="volenteerShowPrograms.php?finalArray="+arr;
 window.location.href=s;
 }
-if(q[i][1]>=q[i + 1][1]){
-finalArray.push(q[i]);
-}
-else{
+
+if((q[i][3]===q[i + 1][3] && q[i][1]<q[i + 1][1])){
 var b = q[i +1];
 finalArray.push(q[i + 1]);
 q[i+1]=q[i];
 q[i]=b;
+//alert(q[i][5]);
+}
+else{
+finalArray.push(q[i]);
+//alert(q[i][3]);
 }
 }
 function checkPreferences(program,volunteers){//check if preferences are match with program's preferences
@@ -100,9 +106,10 @@ function checkPreferences(program,volunteers){//check if preferences are match w
     var count=0;
     var newArray=[];
     for(var i = 0; i < volunteers.length; i++){
+       // alert(volunteers[i][0]);
         var pref=volunteers[i][0].toString();
         var array2 = pref.split(",");
-       //alert(array2);
+        
          for(var j = 0; j < array1.length; j++){
          var found = array2.includes(array1[j]);
          if(found){//if it is matched
