@@ -40,7 +40,7 @@ echo "<script> document.title='الرئيسة' </script>";
     </div><!-- Carousel END -->
   </div>
 </div>
-<div id="responsecontainer">
+<div id="responsecontainer" style="margin:0px;">
                   <?php
   
  $id=$_GET['id'];
@@ -101,7 +101,7 @@ $expire_time = strtotime($enddate);
            </tbody> 
             
            </table> <br>
-        </div>
+     
   <script type="text/javascript" src="jquery-1.3.2.js"> </script>
  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
  <script type="text/javascript">

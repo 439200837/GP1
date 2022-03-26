@@ -1319,6 +1319,9 @@ border-color:#009999;
   border-color: #ddd;
 
 }
+.panel-heading{
+padding: 0px;
+}
 .imgdiv{
  width: 300px;
   padding:0;
@@ -1594,4 +1597,15 @@ text-decoration: none;
  background-color: #fff;
  color:#009999; 
  border: 1.2px solid #009999;
+}
+
+
+.suggest{
+    background-color: #04AA6D;
+    width:100px;
+    height:25px;
+    position: absolute;
+    font-size: 12px;
+    font-weight: 200;
+    line-height: 1.5;
 }

@@ -30,8 +30,12 @@
 			<div class="collapse navbar-collapse navbar-1">
 				<ul class="site-navigation nav">
                                     <li id="firstt">
+						<a href="Archive.php">الأرشيف</a>
+					</li>
+                                    <li >
 						<a href="programs.php">برامجنا</a>
 					</li>
+                                        
 					<li>
 						<a href="about.php">من نحن</a>
 					</li>

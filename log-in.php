@@ -80,6 +80,7 @@ if (mysqli_num_rows($results) > 0) {
  $SavedPass=$row['password'];
  $salt = $row['salt'];
  $name=$row['first_name'];
+ $numVolunteer=$row['numvolunteer'];
   }
   //check if password entered is equal hashed password in the database
   // use hash function for Password encryption
@@ -91,6 +92,7 @@ if (mysqli_num_rows($results) > 0) {
        //save attribute is session array to use it later in authentication
        $_SESSION['type']="volunteer";
        $_SESSION['id']=$id; 
+       $_SESSION['numV']=$numVolunteer;
      $_SESSION['name']=$name;
        $_SESSION['email']=$email;
        $_SESSION['logged_in'] = true;

@@ -63,7 +63,10 @@ while($row=mysqli_fetch_assoc($result)):
     <h2 class="programName"><?=$row['name']?></h2>
     <br>
      
-
+<?php if($_SESSION['logged_in']&& $_SESSION['type']==="member"){?>
+    <button class="detailss" onclick="go('memberrate.php?id=<?=$row['id']?> &date=<?=$row['end_date']?>')">تقييم المتطوعين</button>
+     
+      <?php }?>
       <button class="detailss" onclick="go('archiveDetails.php?id=<?=$row['id']?>')">التفاصيل</button>
 
 </div>

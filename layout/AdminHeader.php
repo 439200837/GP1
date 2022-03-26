@@ -41,6 +41,9 @@ $email=$_SESSION['email'];
                                 <li id="top">
 						<a href="board.php">لوحة التحكم</a>
 					</li>
+                                         <li>
+						<a href="Archive.php">الأرشيف</a>
+					</li>
 					<li>
 						<a href="programs.php">برامجنا</a>
 					</li>

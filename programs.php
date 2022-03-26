@@ -9,6 +9,7 @@ if($_SESSION['logged_in']===true && $_SESSION['type'] ==='member' && $_SESSION['
     require 'layout/loggedHeader.php'; 
  }elseif($_SESSION['logged_in']===true && $_SESSION['type'] ==='volunteer'){
    require'layout/loggedHeader.php';
+   require 'recommendedPrograms.php';
  }else{
   require'layout/header.php';   
  }
@@ -161,7 +162,7 @@ Swal.fire({
 
 <?php
 $currentdate1 = date("Y-m-d");
-$sql="SELECT * FROM `program` WHERE end_date > '$currentdate1'";
+$sql="SELECT * FROM `program` WHERE end_date > '$currentdate1' AND id IN(SELECT program_id FROM enroll WHERE rate='لم يتم التقييم' )";
 //$result=mysqli_query($connection,$sql);
 $sql2="SELECT * FROM `enroll` WHERE `volenteer_id` = '" . $_SESSION["id"] . "'";
 
@@ -169,20 +170,21 @@ $result=mysqli_query($connection,$sql);
 $result3=mysqli_query($connection,$sql);
 $result2=mysqli_query($connection,$sql2);
 
-
-while($row=mysqli_fetch_assoc($result3)):
+while($row=mysqli_fetch_assoc($result3)){
 $check = 0;
 ?>
 <div class="col-md-4">
 <div class="panel panel-default">
 <div class="panel-heading" >
+ <?php if($_SESSION['logged_in']&& $_SESSION['type']==="volunteer"&& in_array( $row['id'], $resultP)){
+     echo '<span class="label suggest" style= "">مقترح لك</span>';
+ }?>
     <div class="imgdiv center-block">
 <?php echo '<img src="data:image/jpeg;base64,'.base64_encode($row['picture']).'"alt:"program img" class="responsive"/>';?>
 </div>
     </div>
   <div class="panel-body">
     <h2 class="programName"><?=$row['name']?></h2>
-    <br>
       <?php if($_SESSION['logged_in']&& $_SESSION['type']==="member"){?>
       <button class="detailss" onclick="go('EditProgram.php?id=<?=$row['id']?>')">تعديل</button>
      
@@ -222,7 +224,7 @@ $check = 0;
           //     break;
           //   }
           // endwhile;
-        } 
+        }//end forech
         
         //not enrolled
          if($check == '0'){
@@ -234,17 +236,20 @@ $check = 0;
          <input type="hidden" name="id" value="<?=$id?>">
         <button class="detailss" type="submit" name="insert">انضم إلينا</button>
        </form>
-      <?php }
+      <?php }//end check=0
       //sent enroll request
       elseif($check == '2'){?>
         <button class="detailss">قيد انتظار القبول </button>
-      <?php }
+      <?php }//end check=2
          //accepted
          else{?>
         <button class="detailss">تمت الموافقة</button>
         <a class="detailssdelete" href="javascript:void(0)" id="delete_enroll" data-id="<?=$enrollid;?>" class="trigger-btn" data-toggle="modal">
 إلغاء</a>
-      <?php } }?>
+       <?php }//end else
+       
+         }//end else
+         ?>
 
       <button class="detailss" onclick="go('detalis.php?id=<?=$row['id']?>')">التفاصيل</button>
 
@@ -307,8 +312,7 @@ $(document).ready(function(){
 	}
 });
 </script>
-<?php endwhile;?>
-
+<?php }?>
 
 
 
@@ -323,15 +327,14 @@ $(document).ready(function(){
 </div>
     
     <element dir="ltr">
-      <?php require 'layout/footer.php';
-?>
+<?php require 'layout/footer.php';?>
 <script type="text/javascript">
 function go(web){
   window.location = web;
 
-
-
 }
+
+
 
 
 </script>

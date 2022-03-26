@@ -35,7 +35,7 @@ echo "<script> document.title='تفاصيل البرنامج' </script>";
    </head>
    <nav aria-label="breadcrumb" style="margin: 1%; margin-top:100px;">
   <ol class="breadcrumb">
-      <li class="breadcrumb-item"><strong><a href="programs.php">برامجنا</a> </strong></li>
+      <li class="breadcrumb-item"><strong><a href="Archive.php">الأرشيف</a> </strong></li>
     <li class="breadcrumb-item active" aria-current="page"> <strong> التفاصيل </strong></li>
   </ol>
 </nav>
